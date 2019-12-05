@@ -1,0 +1,22 @@
+{
+  "name": "cfg",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Edson Alcala <edson_alcala@msn.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/cfg.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "bn.js": "^5.0.0"
+  }
+}

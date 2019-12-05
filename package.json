@@ -1,0 +1,37 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.14",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "jest-junit": "^9.0.0",
+    "lerna": "^3.19.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run tslint:all && npm run check-formatting:all"
+    }
+  },
+  "scripts": {
+    "compile:all": "lerna run compile",
+    "publish:all": "lerna publish from-package --yes",
+    "tslint:all": "lerna run tslint",
+    "tslint:all:ci": "lerna run tslint -- -t json -o report-lint.json",
+    "tslint:fix:all": "lerna run tslint:fix",
+    "check-formatting:all": "lerna run check-formatting",
+    "prettier:all": "lerna run prettier",
+    "test:all": "lerna run test",
+    "test:all:coverage": "lerna run test:coverage",
+    "test:all:coverage:ci": "lerna run test:coverage:ci",
+    "test:all:watch": "lerna run test:watch",
+    "test:cfg": "lerna run test --scope=cfg"
+  }
+}
