@@ -1,9 +1,9 @@
-import { EthereumCFGCreator } from './EthereumCFGCreator'
-import { EVMDisassembler } from './EVMDisassembler'
-import { Disassembler } from './dissasembler/Disassembler'
-import { Operation } from './Operation'
-import { Opcodes } from './Opcodes'
-import { CFGBlocks } from './CFGBlocks'
+import { EthereumCFGCreator } from '../src/EthereumCFGCreator'
+import { EVMDisassembler } from '../src/EVMDisassembler'
+import { Disassembler } from '../src/dissasembler/Disassembler'
+import { Operation } from '../src/Operation'
+import { Opcodes } from '../src/Opcodes'
+import { CFGBlocks } from '../src/CFGBlocks'
 
 let BN = require('bn.js')
 

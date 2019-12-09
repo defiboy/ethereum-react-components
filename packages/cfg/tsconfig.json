@@ -5,7 +5,9 @@
     "rootDir": "./src"
   },
   "include": [
-    "./src"
+    "./src",
+    "test/EVMDisassembler.test.ts",
+    "test/EthereumCFGCreator.test.ts"
   ],
   "exclude": [
     "test"
