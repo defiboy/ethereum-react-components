@@ -10,7 +10,7 @@ import { Opcodes } from "./Opcodes";
 import { Operation } from "./Operation";
 import { OperationBlock } from "./OperationBlock";
 
-// tslint:disable-next-line 
+// tslint:disable-next-line
 const BN = require("bn.js");
 
 export class CFGService {
@@ -41,7 +41,10 @@ export class CFGService {
     const count = this.count(logs.map(l => l.pc));
     const repeated: any = Object.keys(count)
       .filter(key => count[key] > 1)
-      .map(key => ({ offset: parseInt(key, 10), repeated: parseInt(count[key], 10) }));
+      .map(key => ({
+        offset: parseInt(key, 10),
+        repeated: parseInt(count[key], 10)
+      }));
     for (const repeatedOffset of repeated) {
       const block = blocks.get(repeatedOffset.offset);
       if (block) {
