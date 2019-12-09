@@ -1,5 +1,5 @@
 export interface Opcode {
-    name: string
-    opcode: number
-    parameters: number
+  name: string;
+  opcode: number;
+  parameters: number;
 }

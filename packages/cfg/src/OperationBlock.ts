@@ -1,8 +1,8 @@
-import { Operation } from './Operation'
+import { Operation } from "./Operation";
 
 export interface OperationBlock {
-  offset: number
-  operations: Operation[]
-  childA?: number
-  childB?: number
+  offset: number;
+  operations: Operation[];
+  childA?: number;
+  childB?: number;
 }
