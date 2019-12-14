@@ -1,7 +1,7 @@
 import { DisassembledContract, Disassembler } from "./dissasembler";
-import { Opcode } from "./Opcode";
+import { Opcode } from "../../types/src/Opcode";
 import { Opcodes } from "./Opcodes";
-import { Operation } from "./Operation";
+import { Operation } from "../../types/src/Operation";
 
 // tslint:disable-next-line
 const BN = require("bn.js");

@@ -1,4 +1,4 @@
-import { Operation } from "../Operation";
+import { Operation } from "../../../types/src/Operation";
 
 export interface DisassembledContract {
   hasConstructor: boolean;

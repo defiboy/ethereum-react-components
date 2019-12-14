@@ -1,6 +1,6 @@
 import { CFGBlocks } from "./CFGBlocks";
-import { Operation } from "./Operation";
-import { OperationBlock } from "./OperationBlock";
+import { Operation } from "../../types/src/Operation";
+import { OperationBlock } from "../../types/src/OperationBlock";
 
 export interface CFGCreator {
   divideBlocks(ops: Operation[]): CFGBlocks;

@@ -1,4 +1,4 @@
-import { Opcode } from "./Opcode";
+import { Opcode } from "../../types/src/Opcode";
 
 export class Opcodes {
   public static opcodes = {};

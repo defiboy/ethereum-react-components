@@ -1,0 +1,35 @@
+{
+  "name": "@ethereum-react-components/types",
+  "version": "1.0.0",
+  "description": "Types",
+  "author": "Solid Studio <solidstudio@labchain.io>",
+  "homepage": "https://github.com/solid-studio/ethereum-react-components#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solid-studio/ethereum-react-components.git"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "precompile": "npm run clean:lib",
+    "clean:lib": "rimraf lib",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
+    "test": "jest --verbose",
+    "check-formatting": "prettier --list-different 'src/**/*.{ts,ts,js,json}'",
+    "prettier": "prettier --write 'src/**/*.{ts,tsx,js,json}'",
+    "test:coverage": "npm run test -- --reporters=default --reporters=jest-junit --coverage",
+    "test:coverage:ci": "npm run test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=text-lcov | coveralls"
+  },
+  "bugs": {
+    "url": "https://github.com/solid-studio/ethereum-react-components/issues"
+  }
+}
