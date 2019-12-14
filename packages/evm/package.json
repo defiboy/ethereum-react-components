@@ -31,5 +31,9 @@
   },
   "bugs": {
     "url": "https://github.com/solid-studio/ethereum-react-components/issues"
+  },
+  "dependencies": {
+    "@ethereum-react-components/disassembler": "^1.0.0",
+    "@ethereum-react-components/types": "^1.0.0"
   }
 }

@@ -33,6 +33,8 @@
     "test:all:watch": "lerna run test:watch",
     "test:cfg": "lerna run test --scope=cfg",
     "compile:all": "lerna run compile",
-    "compile:types": "lerna run compile --scope=types"
+    "compile:types": "lerna run compile --scope=@ethereum-react-components/types",
+    "compile:disassembler": "lerna run compile --scope=@ethereum-react-components/disassembler",
+    "test:disassembler": "lerna run test --scope=@ethereum-react-components/disassembler"
   }
 }

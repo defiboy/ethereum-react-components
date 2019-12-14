@@ -1,11 +1,11 @@
 {
-  "name": "@ethereum-react-components/cfg",
-  "version": "0.0.0",
+  "name": "@ethereum-react-components/disassembler",
+  "version": "1.0.0",
   "description": "> TODO: description",
-  "author": "Edson Alcala <edson_alcala@msn.com>",
-  "homepage": "",
+  "author": "Solid Studio <solidstudio@labchain.io>",
+  "homepage": "https://github.com/solid-studio/ethereum-react-components#readme",
   "license": "ISC",
-  "main": "lib/cfg.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -13,6 +13,10 @@
   "files": [
     "lib"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solid-studio/ethereum-react-components.git"
+  },
   "scripts": {
     "compile": "tsc",
     "precompile": "npm run clean:lib",
@@ -25,9 +29,10 @@
     "test:coverage": "npm run test -- --reporters=default --reporters=jest-junit --coverage",
     "test:coverage:ci": "npm run test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=text-lcov | coveralls"
   },
+  "bugs": {
+    "url": "https://github.com/solid-studio/ethereum-react-components/issues"
+  },
   "dependencies": {
-    "@ethereum-react-components/disassembler": "^1.0.0",
-    "@ethereum-react-components/evm": "^1.0.0",
     "@ethereum-react-components/types": "^1.0.0",
     "bn.js": "^5.0.0"
   }

@@ -5,15 +5,12 @@
     "rootDir": "./src"
   },
   "include": [
-    "./src",
-    "test/EVMDisassembler.test.ts",
-    "test/EthereumCFGCreator.test.ts",
-    "../types/src/OperationBlock.ts",
-    "../types/src/Operation.ts",
-    "../types/src/Opcode.ts",
-    "../types/src/DebugTrace.ts"
+    "./src"
   ],
   "exclude": [
     "test"
   ]
-}
+},
+"test/EVMExecutor.test.ts",
+"test/EVMMemory.test.ts",
+"test/EVMStack.test.ts"

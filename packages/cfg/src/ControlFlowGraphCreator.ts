@@ -1,11 +1,11 @@
 import { CFGBlocks } from "./CFGBlocks";
-import { Operation } from "../../types/src/Operation";
-import { GFCResponse } from "./types";
-import { DisassembledContract, Disassembler } from "./dissasembler";
-import { EVMDisassembler } from "./EVMDisassembler";
+
+import { DisassembledContract, Disassembler, EVMDisassembler } from "@ethereum-react-components/disassembler";
+import { EVMExecutor, OpcodeExecutor } from "@ethereum-react-components/evm";
+import { Operation } from "@ethereum-react-components/types";
+
 import { CFGCreator, EthereumCFGCreator } from "./EthereumCFGCreator";
-import { EVMExecutor } from "./evm/EVMExecutor";
-import { OpcodeExecutor } from "./evm/exec/OpcodeExecutor";
+import { GFCResponse } from "./types";
 
 export interface CFGContract {
   contractConstructor?: {

@@ -1,0 +1,5 @@
+export { Word } from './Word'
+export { EVMMemory } from './EVMMemory'
+export { EVMStack } from './EVMStack'
+export { EVMExecutor } from './EVMExecutor'
+export { OpcodeExecutor } from './operations/OpcodeExecutor'
