@@ -12,7 +12,13 @@ import { EVM } from "./EVM";
 import { Word } from "./Word";
 
 export class EVMExecutor {
-  public readonly NO_NEXT_BLOCK = ["JUMP", "STOP", "REVERT", "RETURN", "INVALID"];
+  public readonly NO_NEXT_BLOCK = [
+    "JUMP",
+    "STOP",
+    "REVERT",
+    "RETURN",
+    "INVALID"
+  ];
   public evm: EVM;
   public blocks: CFGBlocks;
   public executor: OpcodeExecutor;
