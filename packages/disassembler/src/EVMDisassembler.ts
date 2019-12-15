@@ -1,6 +1,6 @@
+import { Opcode, Opcodes, Operation } from "@ethereum-react-components/types";
 import { DisassembledContract } from "./DisassembledContract";
-import { IDisassembler } from './IDisassembler'
-import { Opcode, Operation, Opcodes } from "@ethereum-react-components/types";
+import { IDisassembler } from "./IDisassembler";
 import { getCleanedBytecode } from "./Utils";
 
 // tslint:disable-next-line
@@ -8,23 +8,27 @@ const BN = require("bn.js");
 
 export class EVMDisassembler implements IDisassembler {
   public disassembleContract(bytecode: string): DisassembledContract {
-    const code = getCleanedBytecode(bytecode)
+    const code = getCleanedBytecode(bytecode);
     const operations: Operation[] = this.disassembleBytecode(code);
     const hasConstructor =
       operations.filter(op => op.opcode.name === "CODECOPY").length > 0;
     let constructor: Operation[] = [];
     let runtime = operations;
     if (hasConstructor) {
-      let splitOpcode = 'STOP'
-      splitOpcode = 'INVALID'
+      let splitOpcode = "STOP";
+      splitOpcode = "INVALID";
       // TODO
       // if (isVersion5OrAbove()) {
       //   splitOpcode = 'INVALID'
       // } Can Remix give me the right version?
       // can I get constructor bytecode and runtime bytecode from compiler?
-      const firstStopIndex = operations.findIndex(op => op.opcode.name === splitOpcode)
-      constructor = operations.slice(0, firstStopIndex + 1)
-      runtime = this.adjustRuntimeOffset(operations.slice(firstStopIndex + 1, operations.length))
+      const firstStopIndex = operations.findIndex(
+        op => op.opcode.name === splitOpcode
+      );
+      constructor = operations.slice(0, firstStopIndex + 1);
+      runtime = this.adjustRuntimeOffset(
+        operations.slice(firstStopIndex + 1, operations.length)
+      );
     }
     return {
       bytecode,
@@ -36,7 +40,7 @@ export class EVMDisassembler implements IDisassembler {
   }
 
   public disassembleBytecode(bytecode: string): Operation[] {
-    let code = getCleanedBytecode(bytecode)
+    const code = getCleanedBytecode(bytecode);
     let offset = 0;
     const operations = code.match(/.{1,2}/g);
     if (!operations) {
@@ -46,7 +50,8 @@ export class EVMDisassembler implements IDisassembler {
 
     for (let i = 0; i < operations.length; i++) {
       const codeHere = operations[i];
-      const opcode: Opcode = Opcodes.opcodes[parseInt(codeHere, 16)] || Opcodes.opcodes[-1];
+      const opcode: Opcode =
+        Opcodes.opcodes[parseInt(codeHere, 16)] || Opcodes.opcodes[-1];
 
       if (this.isPush(opcode)) {
         const parameters = opcode.parameters;
@@ -79,8 +84,8 @@ export class EVMDisassembler implements IDisassembler {
   }
 
   private adjustRuntimeOffset(operations: Operation[]) {
-    const firstOffset = operations[0].offset
-    operations.forEach(op => (op.offset = op.offset - firstOffset))
-    return operations
+    const firstOffset = operations[0].offset;
+    operations.forEach(op => (op.offset = op.offset - firstOffset));
+    return operations;
   }
 }

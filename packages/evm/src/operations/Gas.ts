@@ -1,11 +1,11 @@
-import { Executor } from './Executor'
-import { EVM } from '../EVM'
-import { Operation } from '@ethereum-react-components/types'
-import { Word } from '../Word'
-import { Symbols } from '../Symbols'
+import { Executor } from "./Executor";
+import { EVM } from "../EVM";
+import { Operation } from "@ethereum-react-components/types";
+import { Word } from "../Word";
+import { Symbols } from "../Symbols";
 
 export class Gas implements Executor {
   execute(op: Operation, evm: EVM) {
-    evm.stack.push(Word.createSymbolic(Symbols.GAS))
+    evm.stack.push(Word.createSymbolic(Symbols.GAS));
   }
 }

@@ -1,11 +1,11 @@
-import { Executor } from './Executor'
-import { EVM } from '../EVM'
-import { Operation } from '@ethereum-react-components/types'
-import { Word } from '../Word'
-import { Symbols } from '../Symbols'
+import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
+import { Symbols } from "../Symbols";
+import { Word } from "../Word";
+import { Executor } from "./Executor";
 
 export class Callvalue implements Executor {
-  execute(op: Operation, evm: EVM) {
-    evm.stack.push(Word.createSymbolic(Symbols.CALLVALUE))
+  public execute(op: Operation, evm: EVM) {
+    evm.stack.push(Word.createSymbolic(Symbols.CALLVALUE));
   }
 }

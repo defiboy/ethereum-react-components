@@ -1,4 +1,4 @@
-import { Operation } from '@ethereum-react-components/types'
+import { Operation } from "@ethereum-react-components/types";
 
 export interface DisassembledContract {
   hasConstructor: boolean;

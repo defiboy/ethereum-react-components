@@ -1,19 +1,19 @@
-import { Executor } from './Executor'
-import { EVM } from '../EVM'
-import { Operation } from '@ethereum-react-components/types'
+import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
+import { Executor } from "./Executor";
 
 export class MStore implements Executor {
-  execute(op: Operation, evm: EVM) {
-    const location = evm.stack.pop()
-    const value = evm.stack.pop()
+  public execute(op: Operation, evm: EVM) {
+    const location = evm.stack.pop();
+    const value = evm.stack.pop();
     if (!location || !value) {
-      return
+      return;
     }
     if (!location.isSymbolic) {
       if (location.value.bitLength() > 53) {
-        return
+        return;
       }
-      evm.memory.writeWord(location.value.toNumber(), value)
+      evm.memory.writeWord(location.value.toNumber(), value);
     }
   }
 }

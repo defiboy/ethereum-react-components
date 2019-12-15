@@ -1,9 +1,9 @@
-import { Executor } from './Executor'
-import { EVM } from '../EVM'
-import { Operation } from '@ethereum-react-components/types'
+import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
+import { Executor } from "./Executor";
 
 export class Pop implements Executor {
-  execute(op: Operation, evm: EVM) {
-    evm.stack.pop()
+  public execute(op: Operation, evm: EVM) {
+    evm.stack.pop();
   }
 }

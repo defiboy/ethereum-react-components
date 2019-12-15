@@ -1,7 +1,7 @@
-import { Executor } from './Executor'
-import { EVM } from '../EVM'
-import { Operation } from '@ethereum-react-components/types'
+import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
+import { Executor } from "./Executor";
 
 export class Nop implements Executor {
-  execute(op: Operation, evm: EVM) { }
+  public execute(op: Operation, evm: EVM) {}
 }

@@ -1,15 +1,15 @@
-import { Operation } from '@ethereum-react-components/types'
+import { Operation } from "@ethereum-react-components/types";
 
-import { Executor } from './Executor'
-import { EVM } from '../EVM'
-import { Word } from '../Word'
+import { EVM } from "../EVM";
+import { Word } from "../Word";
+import { Executor } from "./Executor";
 
 export class Push implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const word: Word = {
       isSymbolic: false,
       value: op.argument
-    }
-    evm.stack.push(word)
+    };
+    evm.stack.push(word);
   }
 }

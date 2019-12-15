@@ -1,6 +1,6 @@
-import { EVM } from '../EVM'
-import { Operation } from '@ethereum-react-components/types'
+import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
 
 export interface Executor {
-  execute(op: Operation, evm: EVM)
+  execute(op: Operation, evm: EVM);
 }
