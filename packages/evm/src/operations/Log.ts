@@ -1,9 +1,9 @@
-import { Executor } from "./Executor";
-import { EVM } from "../EVM";
 import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
+import { Executor } from "./Executor";
 
 export class Log implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const index = parseInt(op.opcode.name.slice(3));
     const stackToRemove = index + 2;
     let i = 1;

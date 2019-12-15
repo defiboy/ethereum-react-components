@@ -1,9 +1,9 @@
 import { Operation } from "@ethereum-react-components/types";
 
 import { EVM } from "../EVM";
-import { Word } from "../Word";
 import { Symbols } from "../Symbols";
 import { UintUtils } from "../UintUtils";
+import { Word } from "../Word";
 
 import { Executor } from "./Executor";
 
@@ -18,7 +18,7 @@ export class Add implements Executor {
     if (!operand1.isSymbolic && !operand2.isSymbolic) {
       const op1Value = operand1.value;
       const op2Value = operand2.value;
-      let result = op1Value.add(op2Value).mod(UintUtils.TWO_POW_256);
+      const result = op1Value.add(op2Value).mod(UintUtils.TWO_POW_256);
       evm.stack.push(Word.createLiteral(result.toString(16)));
     } else {
       evm.stack.push(Word.createSymbolic(Symbols.UNKNOWN));

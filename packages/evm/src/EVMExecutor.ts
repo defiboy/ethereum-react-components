@@ -1,22 +1,22 @@
-import { CFGBlocks } from "@ethereum-react-components/types/src/CFGBlocks";
 import {
-  Operation,
   Opcodes,
+  Operation,
   OperationBlock
 } from "@ethereum-react-components/types";
+import { CFGBlocks } from "@ethereum-react-components/types/src/CFGBlocks";
 
 import { Executor } from "./operations/Executor";
 import { OpcodeExecutor } from "./operations/OpcodeExecutor";
 
-import { Word } from "./Word";
 import { EVM } from "./EVM";
+import { Word } from "./Word";
 
 export class EVMExecutor {
-  readonly NO_NEXT_BLOCK = ["JUMP", "STOP", "REVERT", "RETURN", "INVALID"];
-  evm: EVM;
-  blocks: CFGBlocks;
-  executor: OpcodeExecutor;
-  alreadyRunOffsets: number[] = [];
+  public readonly NO_NEXT_BLOCK = ["JUMP", "STOP", "REVERT", "RETURN", "INVALID"];
+  public evm: EVM;
+  public blocks: CFGBlocks;
+  public executor: OpcodeExecutor;
+  public alreadyRunOffsets: number[] = [];
 
   constructor(blocks: CFGBlocks) {
     this.evm = new EVM();
@@ -24,7 +24,7 @@ export class EVMExecutor {
     this.executor = new OpcodeExecutor();
   }
 
-  run(offset: number) {
+  public run(offset: number) {
     const block: OperationBlock = this.blocks.get(offset);
     if (!block) {
       throw new Error(`Could not find block with offset ${offset}`);
@@ -52,7 +52,7 @@ export class EVMExecutor {
     }
   }
 
-  runOrphans() {
+  public runOrphans() {
     while (this.blocks.keys().length !== this.alreadyRunOffsets.length) {
       // logger.info(`There are ${this.blocks.keys().length - this.alreadyRunOffsets.length} orphan block(s) that need to be analyzed`)
       const pickOrphan = this.blocks

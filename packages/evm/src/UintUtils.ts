@@ -1,3 +1,4 @@
+// tslint:disable-next-line
 const BN = require("bn.js");
 
 export class UintUtils {

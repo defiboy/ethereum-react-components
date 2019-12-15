@@ -1,13 +1,13 @@
-import { Executor } from "./Executor";
-import { EVM } from "../EVM";
 import { Operation } from "@ethereum-react-components/types";
-import { Word } from "../Word";
+import { EVM } from "../EVM";
 import { Symbols } from "../Symbols";
 import { UintUtils } from "../UintUtils";
-let BN = require("bn.js");
+import { Word } from "../Word";
+import { Executor } from "./Executor";
+const BN = require("bn.js");
 
 export class Exp implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const base = evm.stack.pop();
     const exp = evm.stack.pop();
     if (!base || !exp) {

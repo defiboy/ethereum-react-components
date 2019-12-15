@@ -1,11 +1,11 @@
-import { Executor } from "./Executor";
-import { EVM } from "../EVM";
 import { Operation } from "@ethereum-react-components/types";
-import { Word } from "../Word";
+import { EVM } from "../EVM";
 import { Symbols } from "../Symbols";
+import { Word } from "../Word";
+import { Executor } from "./Executor";
 
 export class Shr implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const operand1 = evm.stack.pop();
     const operand2 = evm.stack.pop();
     if (!operand1 || !operand2) {
@@ -20,7 +20,7 @@ export class Shr implements Executor {
         return;
       }
 
-      let result = op2Value.shrn(op1Value.toNumber());
+      const result = op2Value.shrn(op1Value.toNumber());
       evm.stack.push(Word.createLiteral(result.toString(16)));
     } else {
       evm.stack.push(Word.createSymbolic(Symbols.UNKNOWN));

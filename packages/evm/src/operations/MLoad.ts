@@ -1,11 +1,11 @@
-import { Executor } from "./Executor";
-import { EVM } from "../EVM";
 import { Operation } from "@ethereum-react-components/types";
+import { EVM } from "../EVM";
 import { Symbols } from "../Symbols";
 import { Word } from "../Word";
+import { Executor } from "./Executor";
 
 export class MLoad implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const location = evm.stack.pop();
     // TODO support symbolic memory
     if (!location) {

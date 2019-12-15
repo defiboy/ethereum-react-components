@@ -3,5 +3,6 @@ import { EVM } from "../EVM";
 import { Executor } from "./Executor";
 
 export class Nop implements Executor {
-  public execute(op: Operation, evm: EVM) {}
+  // tslint:disable-next-line
+  public execute(op: Operation, evm: EVM) { }
 }

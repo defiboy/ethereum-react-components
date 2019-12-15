@@ -1,12 +1,14 @@
-import { Executor } from "./Executor";
-import { EVM } from "../EVM";
 import { Operation } from "@ethereum-react-components/types";
-import { Word } from "../Word";
+import { EVM } from "../EVM";
 import { Symbols } from "../Symbols";
-let BN = require("bn.js");
+import { Word } from "../Word";
+import { Executor } from "./Executor";
+
+// tslint:disable-next-line
+const BN = require("bn.js");
 
 export class Byte implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const operand1 = evm.stack.pop();
     const operand2 = evm.stack.pop();
     if (!operand1 || !operand2) {

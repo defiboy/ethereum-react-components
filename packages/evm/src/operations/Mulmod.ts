@@ -1,12 +1,12 @@
-import { Executor } from "./Executor";
-import { EVM } from "../EVM";
 import { Operation } from "@ethereum-react-components/types";
-import { Word } from "../Word";
+import { EVM } from "../EVM";
 import { Symbols } from "../Symbols";
 import { UintUtils } from "../UintUtils";
+import { Word } from "../Word";
+import { Executor } from "./Executor";
 
 export class Mulmod implements Executor {
-  execute(op: Operation, evm: EVM) {
+  public execute(op: Operation, evm: EVM) {
     const operand1 = evm.stack.pop();
     const operand2 = evm.stack.pop();
     const mod = evm.stack.pop();
@@ -21,7 +21,7 @@ export class Mulmod implements Executor {
       if (modValue.eq(UintUtils.ZERO)) {
         evm.stack.push(Word.createLiteral("00"));
       } else {
-        let result = op1Value.mul(op2Value).mod(modValue);
+        const result = op1Value.mul(op2Value).mod(modValue);
         evm.stack.push(Word.createLiteral(result.toString(16)));
       }
     } else {

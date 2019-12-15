@@ -1,9 +1,9 @@
 import { Opcode } from "@ethereum-react-components/types";
 
 export class Opcodes {
-  static opcodes = {};
+  public static opcodes = {};
 
-  static populate() {
+  public static populate() {
     this.opcodes[-1] = {
       name: "UNKNOWN",
       opcode: 0x00,
@@ -622,7 +622,7 @@ export class Opcodes {
     }
   }
 
-  static isJump(op: Opcode) {
+  public static isJump(op: Opcode) {
     return op.name.startsWith("JUMP");
   }
 }

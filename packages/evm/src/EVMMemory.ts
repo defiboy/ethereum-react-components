@@ -1,5 +1,7 @@
 import { UintUtils } from "./UintUtils";
 import { Word } from "./Word";
+
+// tslint:disable-next-line
 const BN = require("bn.js");
 
 export class EVMMemory {

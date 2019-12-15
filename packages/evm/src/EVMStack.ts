@@ -8,7 +8,7 @@ export class EVMStack {
   }
 
   public pop(): Word {
-    if (this.stack.length == 0) {
+    if (this.stack.length === 0) {
       throw new Error("Invalid operation, no items to pop");
     }
     return this.stack.pop() as Word;

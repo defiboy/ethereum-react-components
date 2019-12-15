@@ -1,5 +1,6 @@
 import { Symbols } from "./Symbols";
 
+// tslint:disable-next-line
 const BN = require("bn.js");
 
 export class Word {
