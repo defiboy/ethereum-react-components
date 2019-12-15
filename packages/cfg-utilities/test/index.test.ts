@@ -15,8 +15,8 @@ describe('CFG utilities tests', () => {
     describe('getCFGBlocksFromOperations', () => {
         test('blocks correctly created, no jumps', () => {
             const bytecode = '60806040'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -26,14 +26,14 @@ describe('CFG utilities tests', () => {
                 },
                 0
             )
-            expect(cfg.length()).toEqual(1)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(1)
+            expect(blocks).toEqual(expectedBlocks)
         })
 
-        test('blocks correctly created, JUMP', () => {
+        test('blocks correctly created, JUMP(0x56)', () => {
             const bytecode = '60806040565b5050'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -58,14 +58,14 @@ describe('CFG utilities tests', () => {
                 },
                 5
             )
-            expect(cfg.length()).toEqual(2)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(2)
+            expect(blocks).toEqual(expectedBlocks)
         })
 
-        test('blocks correctly created, JUMPI', () => {
+        test('blocks correctly created, JUMPI(0x57)', () => {
             const bytecode = '60806040575b5050'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -90,14 +90,14 @@ describe('CFG utilities tests', () => {
                 },
                 5
             )
-            expect(cfg.length()).toEqual(2)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(2)
+            expect(blocks).toEqual(expectedBlocks)
         })
 
-        it('Test blocks correctly created, STOP', () => {
+        test('blocks correctly created, STOP(0x00)', () => {
             const bytecode = '60806040005050'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -118,14 +118,14 @@ describe('CFG utilities tests', () => {
                 },
                 5
             )
-            expect(cfg.length()).toEqual(2)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(2)
+            expect(blocks).toEqual(expectedBlocks)
         })
 
-        test('blocks correctly created, RETURN', () => {
+        test('blocks correctly created, RETURN(0xf3)', () => {
             const bytecode = '60806040f35050'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -146,14 +146,14 @@ describe('CFG utilities tests', () => {
                 },
                 5
             )
-            expect(cfg.length()).toEqual(2)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(2)
+            expect(blocks).toEqual(expectedBlocks)
         })
 
-        test('blocks correctly created, REVERT', () => {
+        test('blocks correctly created, REVERT(0xfd)', () => {
             const bytecode = '60806040fd5050'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -174,14 +174,14 @@ describe('CFG utilities tests', () => {
                 },
                 5
             )
-            expect(cfg.length()).toEqual(2)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(2)
+            expect(blocks).toEqual(expectedBlocks)
         })
 
-        test('blocks correctly created, INVALID', () => {
+        test('blocks correctly created, INVALID(0xfe)', () => {
             const bytecode = '60806040fe5050'
-            const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-            const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+            const operations: Operation[] = disassembler.disassembleBytecode(bytecode)
+            const blocks: CFGBlocks = getCFGBlocksFromOperations(operations)
 
             const expectedBlocks: CFGBlocks = new CFGBlocks()
             expectedBlocks.push(
@@ -202,18 +202,16 @@ describe('CFG utilities tests', () => {
                 },
                 5
             )
-            expect(cfg.length()).toEqual(2)
-            expect(cfg).toEqual(expectedBlocks)
+            expect(blocks.length()).toEqual(2)
+            expect(blocks).toEqual(expectedBlocks)
         })
     })
 
-})
-
-// TODO Create custom helper matcher
-const createOperation = (opcodeName: string, argument: string, offset: number): Operation => {
-    return {
-        offset: offset,
-        argument: new BN(argument, 16),
-        opcode: Opcodes.opcodes[opcodeName]
+    const createOperation = (opcodeName: string, argument: string, offset: number): Operation => {
+        return {
+            offset: offset,
+            argument: new BN(argument, 16),
+            opcode: Opcodes.opcodes[opcodeName]
+        }
     }
-}
+})
