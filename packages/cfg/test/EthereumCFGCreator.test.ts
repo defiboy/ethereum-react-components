@@ -1,17 +1,15 @@
-import { EthereumCFGCreator } from '../src/EthereumCFGCreator'
-import { EVMDisassembler, Disassembler } from '@ethereum-react-components/disassembler'
-import { Operation, Opcodes } from '@ethereum-react-components/types'
-
-import { CFGBlocks } from '../src'
+import { ControlFlowGraphCreator } from '../src'
+import { EVMDisassembler, IDisassembler } from '@ethereum-react-components/disassembler'
+import { Operation, Opcodes, CFGBlocks } from '@ethereum-react-components/types'
 
 let BN = require('bn.js')
 
-describe('EthereumCFGCreator', () => {
-  let cfgCreator: EthereumCFGCreator
-  let disassembler: Disassembler
+describe('ControlFlowGraphCreator', () => {
+  let cfgCreator: ControlFlowGraphCreator
+  let disassembler: IDisassembler
 
   beforeEach(() => {
-    cfgCreator = new EthereumCFGCreator()
+    cfgCreator = new ControlFlowGraphCreator()
     disassembler = new EVMDisassembler()
   })
 

@@ -23,7 +23,7 @@
     "clean:lib": "rimraf lib",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
-    "test": "jest --verbose",
+    "test": "jest EVMDisassembler.test.ts --verbose",
     "check-formatting": "prettier --list-different 'src/**/*.{ts,ts,js,json}'",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,json}'",
     "test:coverage": "npm run test -- --reporters=default --reporters=jest-junit --coverage",

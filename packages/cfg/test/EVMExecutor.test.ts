@@ -1,7 +1,6 @@
-import { EthereumCFGCreator } from '../../cfg/EthereumCFGCreator'
+import { EthereumCFGCreator } from '../src'
 import { EVMDisassembler, DisassembledContract, Disassembler } from '@ethereum-react-components/disassembler'
-import { OpcodeExecutor } from './exec/OpcodeExecutor'
-import { EVMExecutor, Word } from '../src'
+import { OpcodeExecutor, EVMExecutor, Word } from '@ethereum-react-components/evm'
 
 describe('EVMExecutor', () => {
   let cfgCreator: EthereumCFGCreator

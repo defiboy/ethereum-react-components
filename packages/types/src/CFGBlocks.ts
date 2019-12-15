@@ -1,4 +1,4 @@
-import { OperationBlock } from "@ethereum-react-components/types";
+import { OperationBlock } from "./OperationBlock";
 
 export class CFGBlocks {
   public blocks = {};

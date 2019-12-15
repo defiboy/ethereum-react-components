@@ -8,7 +8,10 @@ export class EVMStack {
   }
 
   pop(): Word {
-    return this.stack.pop()
+    if (this.stack.length == 0) {
+      throw new Error('Invalid operation, no items to pop')
+    }
+    return this.stack.pop() as Word
   }
 
   peek(): Word {

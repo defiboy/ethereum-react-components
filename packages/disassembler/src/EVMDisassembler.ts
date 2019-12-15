@@ -1,63 +1,31 @@
 import { DisassembledContract } from "./DisassembledContract";
-import { Disassembler } from './Disassembler'
+import { IDisassembler } from './IDisassembler'
 import { Opcode, Operation, Opcodes } from "@ethereum-react-components/types";
+import { getCleanedBytecode } from "./Utils";
 
 // tslint:disable-next-line
 const BN = require("bn.js");
 
-export class EVMDisassembler implements Disassembler {
-  public static readonly metadataPrefix = "a165627a7a72305820";
-  public static readonly metadataPrefixV2 = "a265627a7a72305820";
-
-  public static removeMetadata(bytecode: string): string {
-    let splittedBytecode: string[] = bytecode.split(
-      EVMDisassembler.metadataPrefix
-    );
-    if (splittedBytecode.length < 2) {
-      splittedBytecode = bytecode.split(
-        EVMDisassembler.metadataPrefix.toUpperCase()
-      );
-    }
-    if (splittedBytecode.length < 2) {
-      splittedBytecode = bytecode.split(EVMDisassembler.metadataPrefixV2);
-    }
-    if (splittedBytecode.length < 2) {
-      splittedBytecode = bytecode.split(
-        EVMDisassembler.metadataPrefixV2.toLocaleUpperCase()
-      );
-    }
-    if (splittedBytecode.length < 2) {
-      return bytecode;
-    }
-    return splittedBytecode[0];
-  }
-
+export class EVMDisassembler implements IDisassembler {
   public disassembleContract(bytecode: string): DisassembledContract {
-    let code = bytecode.trim();
-
-    if (bytecode.startsWith("0x")) {
-      code = bytecode.slice(2);
-    }
-
-    if (code.includes(EVMDisassembler.metadataPrefix)) {
-      code = code.split(EVMDisassembler.metadataPrefix)[0];
-    }
-    if (code.includes(EVMDisassembler.metadataPrefixV2)) {
-      code = code.split(EVMDisassembler.metadataPrefixV2)[0];
-    }
-
-    code = code.length % 2 !== 0 ? code.substr(0, code.length - 1) : code;
-    if (code.length % 2 !== 0) {
-      throw new Error(
-        `disassembleContract - Bad input, bytecode length not even: ${code}, length: ${code.length}`
-      );
-    }
-
-    const operations: Operation[] = this.disassembleBytecode(bytecode);
+    const code = getCleanedBytecode(bytecode)
+    const operations: Operation[] = this.disassembleBytecode(code);
     const hasConstructor =
       operations.filter(op => op.opcode.name === "CODECOPY").length > 0;
-    const constructor = [];
-    const runtime = operations;
+    let constructor: Operation[] = [];
+    let runtime = operations;
+    if (hasConstructor) {
+      let splitOpcode = 'STOP'
+      splitOpcode = 'INVALID'
+      // TODO
+      // if (isVersion5OrAbove()) {
+      //   splitOpcode = 'INVALID'
+      // } Can Remix give me the right version?
+      // can I get constructor bytecode and runtime bytecode from compiler?
+      const firstStopIndex = operations.findIndex(op => op.opcode.name === splitOpcode)
+      constructor = operations.slice(0, firstStopIndex + 1)
+      runtime = this.adjustRuntimeOffset(operations.slice(firstStopIndex + 1, operations.length))
+    }
     return {
       bytecode,
       hasConstructor,
@@ -68,26 +36,7 @@ export class EVMDisassembler implements Disassembler {
   }
 
   public disassembleBytecode(bytecode: string): Operation[] {
-    let code = bytecode.trim();
-
-    if (bytecode.startsWith("0x")) {
-      code = bytecode.slice(2);
-    }
-
-    if (code.includes(EVMDisassembler.metadataPrefix)) {
-      code = code.split(EVMDisassembler.metadataPrefix)[0];
-    }
-
-    if (code.includes(EVMDisassembler.metadataPrefixV2)) {
-      code = code.split(EVMDisassembler.metadataPrefixV2)[0];
-    }
-
-    code = code.length % 2 !== 0 ? code.substr(0, code.length - 1) : code;
-    if (code.length % 2 !== 0) {
-      throw new Error(
-        `disassembleBytecode - Bad input, bytecode length not even: ${code}, length: ${code.length}`
-      );
-    }
+    let code = getCleanedBytecode(bytecode)
     let offset = 0;
     const operations = code.match(/.{1,2}/g);
     if (!operations) {
@@ -97,8 +46,8 @@ export class EVMDisassembler implements Disassembler {
 
     for (let i = 0; i < operations.length; i++) {
       const codeHere = operations[i];
-      const opcode: Opcode =
-        Opcodes.opcodes[parseInt(codeHere, 16)] || Opcodes.opcodes[-1];
+      const opcode: Opcode = Opcodes.opcodes[parseInt(codeHere, 16)] || Opcodes.opcodes[-1];
+
       if (this.isPush(opcode)) {
         const parameters = opcode.parameters;
         const argument = `${operations
@@ -127,5 +76,11 @@ export class EVMDisassembler implements Disassembler {
 
   private isPush(opcode: Opcode): boolean {
     return opcode.name.startsWith("PUSH");
+  }
+
+  private adjustRuntimeOffset(operations: Operation[]) {
+    const firstOffset = operations[0].offset
+    operations.forEach(op => (op.offset = op.offset - firstOffset))
+    return operations
   }
 }

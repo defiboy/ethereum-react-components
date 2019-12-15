@@ -1,11 +1,9 @@
 import { createExecutor, createEVMDisassembler } from './TestUtils'
 import { EVMExecutor } from '../EVMExecutor'
 import { EthereumCFGCreator } from '../../../cfg/EthereumCFGCreator'
-import { Disassembler } from '../../../bytecode/Disassembler'
+import { Disassembler, EVMDisassembler } from '@ethereum-react-components/disassembler'
 import { OpcodeExecutor } from './OpcodeExecutor'
-import { EVMDisassembler } from '../../../bytecode/EVMDisassembler'
-import { Word } from '../Word'
-import { Symbols } from '../Symbols'
+import { Word, Symbols } from '../..src'
 
 describe('Addmod', () => {
   let cfgCreator: EthereumCFGCreator

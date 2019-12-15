@@ -1,3 +1,4 @@
 export { DisassembledContract } from "./DisassembledContract";
-export { Disassembler } from "./Disassembler";
+export { IDisassembler } from "./IDisassembler";
 export { EVMDisassembler } from './EVMDisassembler'
+export * from './Utils'

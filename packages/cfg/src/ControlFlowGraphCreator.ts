@@ -1,74 +1,42 @@
-import { CFGBlocks } from "./CFGBlocks";
 
-import { DisassembledContract, Disassembler, EVMDisassembler } from "@ethereum-react-components/disassembler";
-import { EVMExecutor, OpcodeExecutor } from "@ethereum-react-components/evm";
-import { Operation } from "@ethereum-react-components/types";
-
-import { CFGCreator, EthereumCFGCreator } from "./EthereumCFGCreator";
-import { GFCResponse } from "./types";
-
-export interface CFGContract {
-  contractConstructor?: {
-    bytecode: Operation[]
-    blocks: CFGBlocks,
-    rawBytecode
-  }
-  contractRuntime: {
-    bytecode: Operation[]
-    blocks: CFGBlocks
-    rawBytecode: string
-  }
-}
+import { DisassembledContract, IDisassembler, EVMDisassembler } from "@ethereum-react-components/disassembler";
+import { Operation, CFGBlocks, ControlFlowGraph } from "@ethereum-react-components/types";
+import { getCFGBlocksFromOperations } from "@ethereum-react-components/cfg-utilities"
+import { EVMExecutor } from '@ethereum-react-components/evm'
 
 export class ControlFlowGraphCreator {
-  private disassembler: Disassembler
-  private cfgCreator: CFGCreator
-  private opExecutor: OpcodeExecutor
+  private disassembler: IDisassembler
 
   constructor() {
     this.disassembler = new EVMDisassembler()
-    this.cfgCreator = new EthereumCFGCreator()
-    this.opExecutor = new OpcodeExecutor()
   }
 
-  public async getCFGFromBytecode(bytecode: string): Promise<CFGContract> {
+  public buildControlFlowGraphFromBytecode(bytecode: string): ControlFlowGraph {
     try {
-      const contractBlocks: CFGContract = this.buildCFGFromBytecode(bytecode)
-      return contractBlocks
+      const disassembleContract: DisassembledContract = this.disassembler.disassembleContract(bytecode)
+      const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtime)
+
+      const controlFlowGraph: ControlFlowGraph = {
+        contractRuntime: {
+          blocks: runtimeBlocks,
+          bytecode: disassembleContract.runtime,
+          rawBytecode: disassembleContract.runtimeBytecode
+        },
+        contractConstructor: disassembleContract.hasConstructor ? {
+          blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
+          bytecode: disassembleContract.constructor,
+          rawBytecode: disassembleContract.bytecode
+        } : undefined
+      }
+      return controlFlowGraph
     } catch (err) {
       throw new Error(err.message);
     }
   }
 
-  public buildCFGFromBytecode(bytecode: string): CFGContract {
-    const contract: DisassembledContract = this.disassembler.disassembleContract(bytecode)
-    return this.buildCfgContract(contract)
-  }
-
-  private buildCfgContract(contract: DisassembledContract): CFGContract {
-    const runtimeBlocks = this.calculateCfgBlocks(contract.runtime)
-    const cfgContract: CFGContract = {
-      contractRuntime: {
-        blocks: runtimeBlocks,
-        bytecode: contract.runtime,
-        rawBytecode: contract.runtimeBytecode
-      }
-    }
-    if (contract.hasConstructor) {
-      const constructorBlocks = this.calculateCfgBlocks(contract.constructor)
-      cfgContract.contractConstructor = {
-        blocks: constructorBlocks,
-        bytecode: contract.constructor,
-        rawBytecode: contract.bytecode
-      }
-    }
-    return cfgContract
-  }
-
-  private calculateCfgBlocks(ops: Operation[]): CFGBlocks {
-    // logger.info('Calculating CFG blocks')
-    const blocks = this.cfgCreator.divideBlocks(ops)
-    const executor = new EVMExecutor(blocks, this.opExecutor)
+  private getControlFlowGraphBlocks(operations: Operation[]): CFGBlocks {
+    const blocks = getCFGBlocksFromOperations(operations)
+    const executor = new EVMExecutor(blocks)
     executor.run(0)
     // logger.info('Calculated dynamic CFG, checking if there are orphan nodes not inspected...')
     executor.runOrphans()

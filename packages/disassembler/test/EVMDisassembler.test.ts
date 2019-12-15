@@ -1,12 +1,12 @@
-import { Disassembler, DisassembledContract, EVMDisassembler } from '../src'
+import { IDisassembler, DisassembledContract, EVMDisassembler } from '../src'
 
 let BN = require('bn.js')
 
 describe('Disassembler test', () => {
-  let disass: Disassembler
+  let disassemblerInstance: IDisassembler
 
   beforeEach(() => {
-    disass = new EVMDisassembler()
+    disassemblerInstance = new EVMDisassembler()
   })
 
   it('Test disassembler bytecode', async () => {
@@ -16,7 +16,7 @@ describe('Disassembler test', () => {
       { offset: 1, opcode: { name: 'OR', opcode: 0x17, parameters: 0 }, argument: new BN('0', 16) },
       { offset: 2, opcode: { name: 'XOR', opcode: 0x18, parameters: 0 }, argument: new BN('0', 16) }
     ]
-    const opcodes = disass.disassembleBytecode(bytecode)
+    const opcodes = disassemblerInstance.disassembleBytecode(bytecode)
     expect(opcodes).toEqual(expectedOpcodes)
   })
 
@@ -26,7 +26,7 @@ describe('Disassembler test', () => {
       { offset: 0, opcode: { name: 'PUSH1', opcode: 0x60, parameters: 1 }, argument: new BN(`40`, 16) },
       { offset: 2, opcode: { name: 'PUSH1', opcode: 0x60, parameters: 1 }, argument: new BN(`80`, 16) }
     ]
-    const opcodes = disass.disassembleBytecode(bytecode)
+    const opcodes = disassemblerInstance.disassembleBytecode(bytecode)
     expect(opcodes).toEqual(expectedOpcodes)
   })
 
@@ -36,7 +36,7 @@ describe('Disassembler test', () => {
       { offset: 0, opcode: { name: 'PUSH1', opcode: 0x60, parameters: 1 }, argument: new BN(`40`, 16) },
       { offset: 2, opcode: { name: 'PUSH1', opcode: 0x60, parameters: 1 }, argument: new BN(`80`, 16) }
     ]
-    const opcodes = disass.disassembleBytecode(bytecode)
+    const opcodes = disassemblerInstance.disassembleBytecode(bytecode)
     expect(opcodes).toEqual(expectedOpcodes)
   })
 
@@ -60,14 +60,14 @@ describe('Disassembler test', () => {
       },
       { offset: 46, opcode: { name: 'SWAP1', opcode: 0x90, parameters: 0 }, argument: new BN(`0`, 16) }
     ]
-    const opcodes = disass.disassembleBytecode(bytecode)
+    const opcodes = disassemblerInstance.disassembleBytecode(bytecode)
     expect(opcodes).toEqual(expectedOpcodes)
   })
 
-  it.skip('Test disassemble contract', () => {
+  it('Test disassemble contract', () => {
     const bytecode =
       '608060405234801561001057600080fd5b50610150806100206000396000f3fe608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063550e833a14610046575b600080fd5b34801561005257600080fd5b50610091600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610093565b005b60008290508073ffffffffffffffffffffffffffffffffffffffff1663e73620c3836040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050600060405180830381600087803b15801561010757600080fd5b505af115801561011b573d6000803e3d6000fd5b505050505050505600a165627a7a7230582023d934aceda66b58be34ed6504f47898d0260cfb00ddc47f6b0a54f108013c7f0029'
-    const contract: DisassembledContract = disass.disassembleContract(bytecode)
+    const contract: DisassembledContract = disassemblerInstance.disassembleContract(bytecode)
     const constructor = contract.constructor
     const runtime = contract.runtime
     const firstConstructor = constructor[0]
@@ -86,15 +86,15 @@ describe('Disassembler test', () => {
 
   it('Test disassemble contract only runtime', () => {
     const bytecode = '60806040'
-    const contract: DisassembledContract = disass.disassembleContract(bytecode)
+    const contract: DisassembledContract = disassemblerInstance.disassembleContract(bytecode)
 
     expect(contract.hasConstructor).toBeFalsy()
     expect(contract.constructor.length).toEqual(0)
     expect(contract.bytecode).toEqual(bytecode)
   })
 
-  it.skip('Test odd disassembler bytecode', async () => {
+  it('Test odd disassembler bytecode', async () => {
     const bytecode = '0x16171'
-    expect(() => disass.disassembleBytecode(bytecode)).toThrow()
+    expect(() => disassemblerInstance.disassembleBytecode(bytecode)).toThrow()
   })
 })

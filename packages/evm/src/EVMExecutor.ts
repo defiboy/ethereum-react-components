@@ -1,9 +1,11 @@
-import { EVM } from './EVM'
-import { CFGBlocks } from '../../cfg/src/CFGBlocks'
+import { CFGBlocks } from '@ethereum-react-components/types/src/CFGBlocks'
 import { Operation, Opcodes, OperationBlock } from '@ethereum-react-components/types'
-import { OpcodeExecutor } from './operations/OpcodeExecutor'
-import { Executor } from './operations/Executor'
+
+import { Executor } from './operations/Executor';
+import { OpcodeExecutor } from './operations/OpcodeExecutor';
+
 import { Word } from './Word';
+import { EVM } from './EVM';
 
 export class EVMExecutor {
   readonly NO_NEXT_BLOCK = ['JUMP', 'STOP', 'REVERT', 'RETURN', 'INVALID']
@@ -12,10 +14,10 @@ export class EVMExecutor {
   executor: OpcodeExecutor
   alreadyRunOffsets: number[] = []
 
-  constructor(blocks: CFGBlocks, executor: OpcodeExecutor) {
+  constructor(blocks: CFGBlocks) {
     this.evm = new EVM()
     this.blocks = blocks
-    this.executor = executor
+    this.executor = new OpcodeExecutor()
   }
 
   run(offset: number) {
