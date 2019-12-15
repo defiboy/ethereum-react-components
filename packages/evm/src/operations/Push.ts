@@ -1,9 +1,8 @@
-import 'reflect-metadata'
+import { Operation } from '@ethereum-react-components/types'
 
 import { Executor } from './Executor'
 import { EVM } from '../EVM'
 import { Word } from '../Word'
-import { Operation } from '@ethereum-react-components/types'
 
 export class Push implements Executor {
   execute(op: Operation, evm: EVM) {

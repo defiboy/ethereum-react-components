@@ -1,5 +1,5 @@
 module.exports = {
-    preset: 'ts-jest/presets/js-with-ts',
+    preset: 'ts-jest/presets/default',
     testEnvironment: 'node',
     roots: [
         "<rootDir>/src",
@@ -10,5 +10,6 @@ module.exports = {
             diagnostics: true
         }
     },
+    transformIgnorePatterns: ['^.+\\.js$'],
     reporters: ["default", "jest-junit"],
 };

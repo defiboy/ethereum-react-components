@@ -8,7 +8,7 @@
   "main": "lib/index.js",
   "directories": {
     "lib": "lib",
-    "test": "__tests__"
+    "test": "test"
   },
   "files": [
     "lib"
@@ -35,6 +35,8 @@
   "dependencies": {
     "@ethereum-react-components/cfg-utilities": "^1.0.0",
     "@ethereum-react-components/disassembler": "^1.0.0",
-    "@ethereum-react-components/types": "^1.0.0"
+    "@ethereum-react-components/types": "^1.0.0",
+    "bn.js": "^5.0.0",
+    "ethereumjs-util": "^6.2.0"
   }
 }

@@ -3,6 +3,7 @@ import { EVM } from '../EVM'
 import { Operation } from '@ethereum-react-components/types'
 import { Word } from '../Word'
 import { Symbols } from '../Symbols'
+
 let BN = require('bn.js')
 const utils = require('ethereumjs-util')
 
