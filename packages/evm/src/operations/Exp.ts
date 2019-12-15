@@ -4,6 +4,8 @@ import { Symbols } from "../Symbols";
 import { UintUtils } from "../UintUtils";
 import { Word } from "../Word";
 import { Executor } from "./Executor";
+
+// tslint:disable-next-line
 const BN = require("bn.js");
 
 export class Exp implements Executor {

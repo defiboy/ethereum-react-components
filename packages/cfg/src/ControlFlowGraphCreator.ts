@@ -1,15 +1,15 @@
+import { getCFGBlocksFromOperations } from "@ethereum-react-components/cfg-utilities";
 import {
   DisassembledContract,
-  IDisassembler,
-  EVMDisassembler
+  EVMDisassembler,
+  IDisassembler
 } from "@ethereum-react-components/disassembler";
-import {
-  Operation,
-  CFGBlocks,
-  ControlFlowGraph
-} from "@ethereum-react-components/types";
-import { getCFGBlocksFromOperations } from "@ethereum-react-components/cfg-utilities";
 import { EVMExecutor } from "@ethereum-react-components/evm";
+import {
+  CFGBlocks,
+  ControlFlowGraph,
+  Operation
+} from "@ethereum-react-components/types";
 
 export class ControlFlowGraphCreator {
   private disassembler: IDisassembler;

@@ -22,6 +22,7 @@ export class Signextend implements Executor {
 
       if (kValue.lten(31)) {
         kValue = kValue.toNumber();
+        // tslint:disable-next-line
         if (valArray[31 - kValue] & 0x80) {
           extend = true;
         }

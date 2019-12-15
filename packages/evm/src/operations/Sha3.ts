@@ -4,7 +4,9 @@ import { Symbols } from "../Symbols";
 import { Word } from "../Word";
 import { Executor } from "./Executor";
 
+// tslint:disable-next-line
 const BN = require("bn.js");
+// tslint:disable-next-line
 const utils = require("ethereumjs-util");
 
 export class Sha3 implements Executor {

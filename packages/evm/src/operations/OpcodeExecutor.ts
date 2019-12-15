@@ -70,7 +70,7 @@ import { Timestamp } from "./Timestamp";
 import { Xor } from "./Xor";
 
 export class OpcodeExecutor {
-  public ops = {};
+  public ops = {} as any; // TODO FIX
 
   constructor() {
     this.ops.PUSH1 = new Push();
@@ -213,6 +213,7 @@ export class OpcodeExecutor {
     this.ops.BLOCKHASH = new Blockhash();
     this.ops.COINBASE = new Coinbase();
     this.ops.TIMESTAMP = new Timestamp();
+    // tslint:disable-next-line
     this.ops.NUMBER = new Number();
     this.ops.DIFFICULTY = new Difficulty();
     this.ops.GASLIMIT = new Gaslimit();
