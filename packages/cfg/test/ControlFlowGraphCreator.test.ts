@@ -1,8 +1,10 @@
-import { ControlFlowGraphCreator } from '../src'
 import { EVMDisassembler, IDisassembler } from '@ethereum-react-components/disassembler'
 import { Operation, Opcodes, CFGBlocks } from '@ethereum-react-components/types'
 
-// let BN = require('bn.js')
+import { ControlFlowGraphCreator } from '../src'
+import { getCFGBlocksFromOperations } from '@ethereum-react-components/cfg-utilities'
+
+let BN = require('bn.js')
 
 describe('ControlFlowGraphCreator tests', () => {
   let cfgCreator: ControlFlowGraphCreator
@@ -14,21 +16,22 @@ describe('ControlFlowGraphCreator tests', () => {
   })
 
   // TODO: Move to cfg-utilies
-  // it('Test blocks correctly created, no jumps', () => {
-  //   const bytecode = '60806040'
-  //   const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
-  //   const cfg: CFGBlocks = cfgCreator.divideBlocks(ops)
-  //   const expectedBlocks: CFGBlocks = new CFGBlocks()
-  //   expectedBlocks.push(
-  //     {
-  //       offset: 0,
-  //       operations: [createOperation(0, '80', 'PUSH1'), createOperation(2, '40', 'PUSH1')]
-  //     },
-  //     0
-  //   )
-  //   expect(cfg.length()).toEqual(1)
-  //   expect(cfg).toEqual(expectedBlocks)
-  // })
+  it('Test blocks correctly created, no jumps', () => {
+    const bytecode = '60806040'
+    const ops: Operation[] = disassembler.disassembleBytecode(bytecode)
+    const cfg: CFGBlocks = getCFGBlocksFromOperations(ops)
+
+    const expectedBlocks: CFGBlocks = new CFGBlocks()
+    expectedBlocks.push(
+      {
+        offset: 0,
+        operations: [createOperation(0, '80', 'PUSH1'), createOperation(2, '40', 'PUSH1')]
+      },
+      0
+    )
+    expect(cfg.length()).toEqual(1)
+    expect(cfg).toEqual(expectedBlocks)
+  })
 
   // it('Test blocks correctly created, JUMP', () => {
   //   const bytecode = '60806040565b5050'
@@ -201,10 +204,10 @@ describe('ControlFlowGraphCreator tests', () => {
   // })
 })
 
-// function createOperation(offset: number, argument: string, opcodeName: string): Operation {
-//   return {
-//     offset: offset,
-//     argument: new BN(argument, 16),
-//     opcode: Opcodes.opcodes[opcodeName]
-//   }
-// }
+const createOperation = (offset: number, argument: string, opcodeName: string): Operation => {
+  return {
+    offset: offset,
+    argument: new BN(argument, 16),
+    opcode: Opcodes.opcodes[opcodeName]
+  }
+}
