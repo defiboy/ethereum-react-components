@@ -25,7 +25,7 @@
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
     "test": "jest --verbose",
     "check-formatting": "prettier --list-different \"src/**/*.{ts,tsx,js,json}\"",
-    "prettier": "prettier --write 'src/**/*.{ts,tsx,js,json}'",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,json}\"",
     "test:coverage": "npm run test -- --reporters=default --reporters=jest-junit --coverage",
     "test:coverage:ci": "npm run test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=text-lcov | coveralls"
   },
