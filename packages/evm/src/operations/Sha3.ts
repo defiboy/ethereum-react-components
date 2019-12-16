@@ -24,10 +24,7 @@ export class Sha3 implements Executor {
         evm.stack.push(Word.createSymbolic(Symbols.UNKNOWN));
         return;
       }
-      const memoryContent = evm.memory.load(
-        offset.toNumber(),
-        length.toNumber()
-      );
+      const memoryContent = evm.memory.load(offset.toNumber(), length.toNumber());
       const result = new BN(utils.keccak256(memoryContent));
       evm.stack.push(Word.createLiteral(result.toString(16)));
     } else {

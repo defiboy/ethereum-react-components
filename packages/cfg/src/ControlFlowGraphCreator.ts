@@ -1,15 +1,7 @@
 import { getCFGBlocksFromOperations } from "@ethereum-react-components/cfg-utilities";
-import {
-  DisassembledContract,
-  EVMDisassembler,
-  IDisassembler
-} from "@ethereum-react-components/disassembler";
+import { DisassembledContract, EVMDisassembler, IDisassembler } from "@ethereum-react-components/disassembler";
 import { EVMExecutor } from "@ethereum-react-components/evm";
-import {
-  CFGBlocks,
-  ControlFlowGraph,
-  Operation
-} from "@ethereum-react-components/types";
+import { CFGBlocks, ControlFlowGraph, Operation } from "@ethereum-react-components/types";
 
 export class ControlFlowGraphCreator {
   private disassembler: IDisassembler;
@@ -20,12 +12,8 @@ export class ControlFlowGraphCreator {
 
   public buildControlFlowGraphFromBytecode(bytecode: string): ControlFlowGraph {
     try {
-      const disassembleContract: DisassembledContract = this.disassembler.disassembleContract(
-        bytecode
-      );
-      const runtimeBlocks = this.getControlFlowGraphBlocks(
-        disassembleContract.runtime
-      );
+      const disassembleContract: DisassembledContract = this.disassembler.disassembleContract(bytecode);
+      const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtime);
 
       const controlFlowGraph: ControlFlowGraph = {
         contractRuntime: {
@@ -35,9 +23,7 @@ export class ControlFlowGraphCreator {
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-              blocks: this.getControlFlowGraphBlocks(
-                disassembleContract.constructor
-              ),
+              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
               bytecode: disassembleContract.constructor,
               rawBytecode: disassembleContract.bytecode
             }

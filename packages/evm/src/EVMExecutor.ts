@@ -1,8 +1,4 @@
-import {
-  Opcodes,
-  Operation,
-  OperationBlock
-} from "@ethereum-react-components/types";
+import { Opcodes, Operation, OperationBlock } from "@ethereum-react-components/types";
 import { CFGBlocks } from "@ethereum-react-components/types/src/CFGBlocks";
 
 import { Executor } from "./operations/Executor";
@@ -12,13 +8,7 @@ import { EVM } from "./EVM";
 import { Word } from "./Word";
 
 export class EVMExecutor {
-  public readonly NO_NEXT_BLOCK = [
-    "JUMP",
-    "STOP",
-    "REVERT",
-    "RETURN",
-    "INVALID"
-  ];
+  public readonly NO_NEXT_BLOCK = ["JUMP", "STOP", "REVERT", "RETURN", "INVALID"];
   public evm: EVM;
   public blocks: CFGBlocks;
   public executor: OpcodeExecutor;
@@ -39,20 +29,14 @@ export class EVMExecutor {
     this.alreadyRunOffsets.push(offset);
     const nextBlocks: OperationBlock[] = this.findNextBlocks(block);
     for (const nextBlock of nextBlocks) {
-      if (
-        block.childA !== nextBlock.offset &&
-        block.childB !== nextBlock.offset
-      ) {
+      if (block.childA !== nextBlock.offset && block.childB !== nextBlock.offset) {
         if (!block.childA) {
           block.childA = nextBlock.offset;
         } else if (!block.childB) {
           block.childB = nextBlock.offset;
         }
       }
-      if (
-        nextBlock.offset !== 0 &&
-        !this.alreadyRunOffsets.includes(nextBlock.offset)
-      ) {
+      if (nextBlock.offset !== 0 && !this.alreadyRunOffsets.includes(nextBlock.offset)) {
         this.run(nextBlock.offset);
       }
     }
@@ -61,9 +45,7 @@ export class EVMExecutor {
   public runOrphans() {
     while (this.blocks.keys().length !== this.alreadyRunOffsets.length) {
       // logger.info(`There are ${this.blocks.keys().length - this.alreadyRunOffsets.length} orphan block(s) that need to be analyzed`)
-      const pickOrphan = this.blocks
-        .keys()
-        .find(key => !this.alreadyRunOffsets.includes(key));
+      const pickOrphan = this.blocks.keys().find(key => !this.alreadyRunOffsets.includes(key));
       // TODO
       if (pickOrphan) {
         this.alreadyRunOffsets.push(pickOrphan);
@@ -71,10 +53,7 @@ export class EVMExecutor {
         if (orphanBlock) {
           const nextBlocks: OperationBlock[] = this.findNextBlocks(orphanBlock);
           for (const nextBlock of nextBlocks) {
-            if (
-              orphanBlock.childA !== nextBlock.offset &&
-              orphanBlock.childB !== nextBlock.offset
-            ) {
+            if (orphanBlock.childA !== nextBlock.offset && orphanBlock.childB !== nextBlock.offset) {
               if (!orphanBlock.childA) {
                 orphanBlock.childA = nextBlock.offset;
               } else if (!orphanBlock.childB) {
