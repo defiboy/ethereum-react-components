@@ -19,6 +19,7 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
           const table = document.createElement("table")
           const tableE = d3.select(table)
           tableE.classed('graph__block-table', true)
+          // tslint:disable-next-line:prefer-for-of
           for (let index = 0; index < block.operations.length; index++) {
             const op = block.operations[index]
             const tr = tableE.append("tr");
