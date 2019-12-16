@@ -34,6 +34,7 @@
     "@storybook/react": "^5.2.8",
     "@types/d3": "^5.7.2",
     "@types/dagre-d3": "^0.4.39",
+    "@types/d3-graphviz": "^2.6.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "react-docgen-typescript-loader": "^3.6.0",
@@ -41,7 +42,7 @@
     "tslint-react": "^4.1.0"
   },
   "dependencies": {
-    "@types/d3-graphviz": "^2.6.2",
+    "@ethereum-react-components/types": "^1.0.0",
     "d3": "^5.14.2",
     "d3-graphviz": "^2.6.1",
     "dagre-d3": "^0.6.4"
