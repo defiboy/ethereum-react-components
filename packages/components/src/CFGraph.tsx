@@ -71,7 +71,7 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     svg.attr('height', g.graph().height * initialScale + 40);
   }
 
-  return (<StyledWrapper><div onClick={renderGraph}>Lets render</div><svg id="graph" width="600" height="600"><g/></svg></StyledWrapper>)
+  return (<StyledWrapper><input type="button" onClick={renderGraph} value="Lets render"/><br/><svg id="graph" width="600" height="600"><g/></svg></StyledWrapper>)
 }
 
 const StyledWrapper = styled.div`
