@@ -4,11 +4,9 @@ export const METADATA_PREFIX_V2 = "a265627a7a72305820";
 const METADATA_PREFIX_V1_REGEX = new RegExp(METADATA_PREFIX_V1, "i");
 const METADATA_PREFIX_V2_REGEX = new RegExp(METADATA_PREFIX_V2, "i");
 
-export const hasMetadataPrefixV1 = (bytecode: string) =>
-  METADATA_PREFIX_V1_REGEX.test(bytecode);
+export const hasMetadataPrefixV1 = (bytecode: string) => METADATA_PREFIX_V1_REGEX.test(bytecode);
 
-export const hasMetadataPrefixV2 = (bytecode: string) =>
-  METADATA_PREFIX_V2_REGEX.test(bytecode);
+export const hasMetadataPrefixV2 = (bytecode: string) => METADATA_PREFIX_V2_REGEX.test(bytecode);
 
 export const removeMetadata = (bytecode: string): string => {
   if (hasMetadataPrefixV1(bytecode)) {
@@ -34,9 +32,7 @@ export const getCleanedBytecode = (bytecode: string): string => {
   const code = removeMetadata(cleanedBytecode);
 
   if (code.length % 2 !== 0) {
-    throw new Error(
-      `Bad input, bytecode length not even: ${code}, length: ${code.length}`
-    );
+    throw new Error(`Bad input, bytecode length not even: ${code}, length: ${code.length}`);
   }
 
   return code;

@@ -19,11 +19,7 @@ export class EVMMemory {
     const length = this.bufferLength();
     let result = 0;
     let firstNonZero = false;
-    for (
-      let i = length - Word.WORD_LENGTH_IN_BYTES;
-      i >= 0;
-      i = i - Word.WORD_LENGTH_IN_BYTES
-    ) {
+    for (let i = length - Word.WORD_LENGTH_IN_BYTES; i >= 0; i = i - Word.WORD_LENGTH_IN_BYTES) {
       const word = this.loadWord(i).value;
       if (word.eq(UintUtils.ZERO) && !firstNonZero) {
         continue;
@@ -74,9 +70,6 @@ export class EVMMemory {
   }
 
   private increaseBufferLength() {
-    this.memory = Buffer.concat([
-      this.memory,
-      Buffer.alloc(this.memory.length)
-    ]);
+    this.memory = Buffer.concat([this.memory, Buffer.alloc(this.memory.length)]);
   }
 }

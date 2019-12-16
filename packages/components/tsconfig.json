@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "lib": ["es6", "dom", "es2017"],
+    "target": "es5",
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "noImplicitReturns": true,
+    "importHelpers": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "rootDirs": ["src", "stories"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/setupTests.ts", "src/**/*.test.*"]
+}

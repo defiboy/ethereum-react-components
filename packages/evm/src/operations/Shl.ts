@@ -21,9 +21,7 @@ export class Shl implements Executor {
         return;
       }
 
-      const result = op2Value
-        .shln(op1Value.toNumber())
-        .iand(UintUtils.MAX_INTEGER);
+      const result = op2Value.shln(op1Value.toNumber()).iand(UintUtils.MAX_INTEGER);
       evm.stack.push(Word.createLiteral(result.toString(16)));
     } else {
       evm.stack.push(Word.createSymbolic(Symbols.UNKNOWN));
