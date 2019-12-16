@@ -7,8 +7,8 @@
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check-formatting": "prettier --list-different \"{src,stories}/**/*.{ts,ts,js,json}\"",
-    "prettier": "prettier --write \"{src,stories}/**/*.{ts,tsx,js,json}\"",
+    "check-formatting": "prettier --list-different \"src/**/*.{ts,tsx,js,json}\"",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,json}\"",
     "storybook": "start-storybook -p 6009",
     "build-storybook": "build-storybook"
   },
