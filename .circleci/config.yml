@@ -35,6 +35,9 @@ jobs:
       - checkout
       - *restore_cache
       - run:
+        name: Lerna Boostrap
+        command: npx lerna bootstrap
+      - run:
           name: TSLint
           command: npm run tslint:all:ci
       - run:
