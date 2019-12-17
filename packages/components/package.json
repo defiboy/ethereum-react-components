@@ -12,6 +12,9 @@
     "storybook": "start-storybook -p 6009",
     "build-storybook": "build-storybook"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "",
   "license": "ISC",
   "peerDependencies": {
@@ -47,5 +50,5 @@
     "d3-graphviz": "^2.6.1",
     "dagre-d3": "^0.6.4"
   },
-  "gitHead": "ebb230ee941e93cc3f1a0300f7bb93a461640c0c"
+  "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }
