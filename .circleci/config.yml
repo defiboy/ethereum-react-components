@@ -65,22 +65,6 @@ jobs:
       - store_artifacts:
           path: reports/junit
 
-  # TODO: add more integration tasks in other packages
-  server-integration-tests:
-    docker: *nodejs-docker-image
-    steps:
-      - checkout
-      - *restore_cache
-      - run:
-          name: Lerna Boostrap
-          command: npx lerna bootstrap
-      - run:
-          name: Compile All
-          command: npm run compile:all
-      - run:
-          name: Run server tests
-          command: npm run test:server:integration
-
   npm-audit: 
     docker: *nodejs-docker-image
     steps:
@@ -123,10 +107,6 @@ workflows:
           context: SolidStudio
           requires:
             - setup
-      - server-integration-tests:
-          context: SolidStudio
-          requires:
-            - setup
       - npm-audit:
           requires:
             - setup
@@ -135,7 +115,6 @@ workflows:
           requires:
             - tslint-and-format
             - tests
-            - server-integration-tests
             - npm-audit
           filters:
             branches:
