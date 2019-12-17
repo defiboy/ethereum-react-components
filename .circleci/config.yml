@@ -1,0 +1,139 @@
+version: 2.0
+
+aliases:
+  - &nodejs-docker-image
+    - image: circleci/node:10.16.3
+  
+  - &restore_cache
+    restore_cache:
+      name: Restore node_modules cache
+      keys:
+        - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - node-v1-{{ .Branch }}-
+        - node-v1-
+
+jobs:
+  setup:
+    docker: *nodejs-docker-image
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Install NPM
+          command: |
+            echo 'Installing dependencies'
+            npm install
+            npx lerna bootstrap
+      - save_cache: 
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+  
+  tslint-and-format: 
+    docker: *nodejs-docker-image
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: TSLint
+          command: npm run tslint:all:ci
+      - run:
+          name: Check formatting (Prettier)
+          command: npm run check-formatting:all
+  
+  tests:
+    docker: *nodejs-docker-image
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Lerna Boostrap
+          command: npx lerna bootstrap
+      - run:
+          name: Compile All
+          command: npm run compile:all
+      - run:
+          name: Run tests with JUnit as reporter
+          command: npm run test:all:coverage # TODO add ci task
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
+
+  # TODO: add more integration tasks in other packages
+  server-integration-tests:
+    docker: *nodejs-docker-image
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Lerna Boostrap
+          command: npx lerna bootstrap
+      - run:
+          name: Compile All
+          command: npm run compile:all
+      - run:
+          name: Run server tests
+          command: npm run test:server:integration
+
+  npm-audit: 
+    docker: *nodejs-docker-image
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: NPM Audit
+          command: npm audit
+
+  publish: 
+    docker: *nodejs-docker-image
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Lerna Boostrap
+          command: npx lerna bootstrap
+      - run: 
+          name: Compile all
+          command: npm run compile:all
+      - run: 
+          name: Discard changes // Truffle BUG
+          command: git stash
+      - run: 
+          name: Prepare
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
+          name: Publish all
+          command: npm run publish:all
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - setup
+      - tslint-and-format:
+          requires:
+            - setup
+      - tests:
+          context: SolidStudio
+          requires:
+            - setup
+      - server-integration-tests:
+          context: SolidStudio
+          requires:
+            - setup
+      - npm-audit:
+          requires:
+            - setup
+      - publish:
+          context: SolidStudio
+          requires:
+            - tslint-and-format
+            - tests
+            - server-integration-tests
+            - npm-audit
+          filters:
+            branches:
+              only: master
