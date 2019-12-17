@@ -36,5 +36,6 @@
     "@ethereum-react-components/disassembler": "^1.0.1",
     "@ethereum-react-components/types": "^1.0.1",
     "bn.js": "^5.0.0"
-  }
+  },
+  "gitHead": "eb1030198479e8ae639fff76df0fe54efb7e6200"
 }

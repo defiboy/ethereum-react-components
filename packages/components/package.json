@@ -1,5 +1,5 @@
 {
-  "name": "components",
+  "name": "@ethereum-react-components/ui",
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
@@ -46,5 +46,6 @@
     "d3": "^5.14.2",
     "d3-graphviz": "^2.6.1",
     "dagre-d3": "^0.6.4"
-  }
+  },
+  "gitHead": "eb1030198479e8ae639fff76df0fe54efb7e6200"
 }
