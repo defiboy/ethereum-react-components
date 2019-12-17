@@ -1,6 +1,6 @@
 {
   "name": "@ethereum-react-components/disassembler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "> TODO: description",
   "author": "Solid Studio <solidstudio@labchain.io>",
   "homepage": "https://github.com/solid-studio/ethereum-react-components#readme",
@@ -33,7 +33,7 @@
     "url": "https://github.com/solid-studio/ethereum-react-components/issues"
   },
   "dependencies": {
-    "@ethereum-react-components/types": "^1.0.0",
+    "@ethereum-react-components/types": "^1.0.1",
     "bn.js": "^5.0.0"
   }
 }

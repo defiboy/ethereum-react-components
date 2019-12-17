@@ -1,6 +1,6 @@
 {
   "name": "components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -33,8 +33,8 @@
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
     "@types/d3": "^5.7.2",
-    "@types/dagre-d3": "^0.4.39",
     "@types/d3-graphviz": "^2.6.2",
+    "@types/dagre-d3": "^0.4.39",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "react-docgen-typescript-loader": "^3.6.0",
@@ -42,7 +42,7 @@
     "tslint-react": "^4.1.0"
   },
   "dependencies": {
-    "@ethereum-react-components/types": "^1.0.0",
+    "@ethereum-react-components/types": "^1.0.1",
     "d3": "^5.14.2",
     "d3-graphviz": "^2.6.1",
     "dagre-d3": "^0.6.4"

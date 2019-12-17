@@ -1,6 +1,6 @@
 {
   "name": "@ethereum-react-components/evm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "> TODO: description",
   "author": "Solid Studio <solidstudio@labchain.io>",
   "homepage": "https://github.com/solid-studio/ethereum-react-components#readme",
@@ -33,9 +33,9 @@
     "url": "https://github.com/solid-studio/ethereum-react-components/issues"
   },
   "dependencies": {
-    "@ethereum-react-components/cfg-utilities": "^1.0.0",
-    "@ethereum-react-components/disassembler": "^1.0.0",
-    "@ethereum-react-components/types": "^1.0.0",
+    "@ethereum-react-components/cfg-utilities": "^1.1.0",
+    "@ethereum-react-components/disassembler": "^1.0.1",
+    "@ethereum-react-components/types": "^1.0.1",
     "bn.js": "^5.0.0",
     "ethereumjs-util": "^6.2.0"
   }
