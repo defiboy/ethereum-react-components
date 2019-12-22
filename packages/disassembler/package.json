@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@ethereum-react-components/types": "^1.0.4",
-    "bn.js": "^5.0.0"
+    "bn.js": "4.11.8"
   },
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }

@@ -29,8 +29,7 @@ export class EVMDisassembler implements IDisassembler {
       bytecode,
       hasConstructor,
       runtime,
-      constructor,
-      runtimeBytecode: ""
+      constructor
     } as DisassembledContract;
   }
 
@@ -64,11 +63,12 @@ export class EVMDisassembler implements IDisassembler {
   }
 
   private createOperation(offset: number, opcode: Opcode, argument: string) {
-    return {
+    const result = {
       offset,
       opcode,
       argument: new BN(argument, 16)
     } as Operation;
+    return result
   }
 
   private isPush(opcode: Opcode): boolean {
