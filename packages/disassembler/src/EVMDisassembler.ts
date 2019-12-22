@@ -68,7 +68,7 @@ export class EVMDisassembler implements IDisassembler {
       opcode,
       argument: new BN(argument, 16)
     } as Operation;
-    return result
+    return result;
   }
 
   private isPush(opcode: Opcode): boolean {
