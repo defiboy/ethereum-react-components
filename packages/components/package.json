@@ -2,7 +2,8 @@
   "name": "@ethereum-react-components/ui",
   "version": "1.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.es.js",
   "scripts": {
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
@@ -48,9 +49,14 @@
     "tslint-react": "^4.1.0"
   },
   "dependencies": {
+    "@ethereum-react-components/types": "^1.0.4",
     "d3": "^5.14.2",
     "dagre-d3": "^0.6.4",
-    "@ethereum-react-components/types": "^1.0.4"
+    "rollup": "^1.27.14",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.25.3"
   },
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }
