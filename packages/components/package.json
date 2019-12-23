@@ -26,8 +26,10 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
+    "@ethereum-react-components/cfg": "^1.0.3",
     "@storybook/addon-a11y": "^5.2.8",
     "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-console": "^1.2.1",
     "@storybook/addon-info": "^5.2.8",
     "@storybook/addon-knobs": "^5.2.8",
     "@storybook/addon-links": "^5.2.8",
@@ -38,6 +40,7 @@
     "@types/d3": "^5.7.2",
     "@types/d3-graphviz": "^2.6.2",
     "@types/dagre-d3": "^0.4.39",
+    "@types/webpack-env": "^1.14.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "react-docgen-typescript-loader": "^3.6.0",
@@ -45,11 +48,9 @@
     "tslint-react": "^4.1.0"
   },
   "dependencies": {
-    "@ethereum-react-components/cfg": "^1.0.3",
-    "@ethereum-react-components/types": "^1.0.4",
     "d3": "^5.14.2",
-    "d3-graphviz": "^2.6.1",
-    "dagre-d3": "^0.6.4"
+    "dagre-d3": "^0.6.4",
+    "@ethereum-react-components/types": "^1.0.4"
   },
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }
