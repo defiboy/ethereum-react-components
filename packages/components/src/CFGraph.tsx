@@ -3,13 +3,40 @@ import dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import * as d3Graphviz from 'd3-graphviz'
 import styled from 'styled-components'
-import { OperationBlock } from '@ethereum-react-components/types'
+import { OperationBlock, Operation } from '@ethereum-react-components/types'
 
 export interface ICFGraphProps {
-  blocks: OperationBlock[]
+  blocks: OperationBlock[],
+  trace: Array<{
+    depth: number;
+    error?: any;
+    gas: string;
+    gasCost: string;
+    memory: string[];
+    op: string;
+    pc: number;
+    stack?: string[];
+    storage?: any;
+  }>,
+  operationSelected?: (op: Operation) => void
 }
 
 export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
+  const [ activeBlocks, setActiveBlocks ] =  React.useState()
+
+  console.log(activeBlocks)
+
+  const opSelected = (op: Operation) => {
+    if (props.operationSelected) {
+      props.operationSelected(op)
+      setActiveBlocks(props.blocks.find(b => b.operations.includes(op)))
+    }
+  }
+
+  const isInTrace = (op: Operation) => {
+    return props.trace && props.trace.find( t=> t.pc === op.offset)
+  }
+
   const renderGraph = () => {
     const g = new dagreD3.graphlib.Graph().setGraph({})
 
@@ -28,7 +55,11 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
             tr.append('td').text(op.opcode.name.toUpperCase())
             tr.append('td').text(op.opcode.name.startsWith('PUSH') ? '0x' + op.argument.toString(16).toUpperCase() : '')
 
-            tr.on('click', () => alert(JSON.stringify(op)))
+            if (isInTrace(op)) {
+              tr.classed('acive-item', true)
+            }
+
+            tr.on('click', () => opSelected(op))
           }
 
           return table
@@ -115,6 +146,10 @@ const StyledWrapper = styled.div`
     border: 1.6px solid orange;
     padding: 10px;
     text-align: left;
+  }
+
+  .acive-item {
+    background: gray;
   }
 
   .node rect,
