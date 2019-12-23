@@ -13,6 +13,9 @@
   "files": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/solid-studio/ethereum-react-components.git"
@@ -32,5 +35,5 @@
   "bugs": {
     "url": "https://github.com/solid-studio/ethereum-react-components/issues"
   },
-  "gitHead": "ebb230ee941e93cc3f1a0300f7bb93a461640c0c"
+  "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }

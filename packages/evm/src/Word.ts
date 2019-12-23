@@ -7,7 +7,10 @@ export class Word {
   public static WORD_LENGTH_IN_BYTES = 32;
 
   public static createLiteral(valueHex: string): Word {
-    return { isSymbolic: false, value: new BN(valueHex, 16) } as Word;
+    return {
+      isSymbolic: false,
+      value: new BN(valueHex, 16)
+    } as Word;
   }
 
   public static createSymbolic(symbol: Symbols): Word {

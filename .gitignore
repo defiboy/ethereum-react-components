@@ -3,3 +3,4 @@ node_modules
 junit.xml
 lib
 TODO.md
+.DS_Store
