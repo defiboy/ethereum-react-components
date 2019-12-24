@@ -15,7 +15,7 @@
     "noImplicitReturns": true,
     "importHelpers": true,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./lib",
     "rootDirs": ["src", "stories"]
   },
   "include": ["src/**/*"],
