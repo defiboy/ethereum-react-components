@@ -86,7 +86,9 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
   }
 
   const renderGraph = () => {
-    const g = new dagreD3.graphlib.Graph().setGraph({})
+    const g = new dagreD3.graphlib.Graph().setGraph({
+      rankdir: 'LR'
+    })
 
     props.blocks.forEach(block => renderBlock(block, g))
     props.blocks.forEach(block => renderEdges(block, g))
@@ -109,19 +111,18 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 
     d3.selectAll('foreignObject > div').classed('node-wrapper', true)
 
-    // Center the graph
-    const initialScale = 1
-    svg.call(
-      zoom.transform,
-      d3.zoomIdentity.translate((svg.attr('width') - g.graph().width * initialScale) / 2, 20).scale(initialScale)
-    )
-
-    svg.attr('height', g.graph().height * initialScale + 40)
+    // // Center the graph
+    // const initialScale = 1
+    // svg.call(
+    //   zoom.transform,
+    //   d3.zoomIdentity.translate((svg.attr('width') - g.graph().width * initialScale) / 2, 20).scale(initialScale)
+    // )
+    // svg.attr('height', g.graph().height * initialScale + 40)
   }
 
   return (
     <StyledWrapper>
-      <svg ref={svgElem} id="graph" width="600" height="600">
+      <svg ref={svgElem} id="graph" width="100%" height="80vh">
         <g ref={innerElem} />
       </svg>
     </StyledWrapper>
