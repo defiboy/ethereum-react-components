@@ -42,25 +42,24 @@
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
     "@types/d3": "^5.7.2",
-    "@types/d3-graphviz": "^2.6.2",
     "@types/dagre-d3": "^0.4.39",
     "@types/webpack-env": "^1.14.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "react-docgen-typescript-loader": "^3.6.0",
-    "styled-components": "^4.4.1",
-    "tslint-react": "^4.1.0"
-  },
-  "dependencies": {
-    "@ethereum-react-components/types": "^1.1.0",
-    "d3": "^5.14.2",
-    "dagre-d3": "^0.6.4",
     "rollup": "^1.27.14",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-typescript2": "^0.25.3",
+    "styled-components": "^4.4.1",
+    "tslint-react": "^4.1.0",
     "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "@ethereum-react-components/types": "^1.1.0",
+    "d3": "^5.14.2",
+    "dagre-d3": "^0.6.4"
   },
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }

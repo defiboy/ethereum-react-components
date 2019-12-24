@@ -16,7 +16,8 @@
     "importHelpers": true,
     "declaration": true,
     "declarationDir": "./lib",
-    "rootDirs": ["src", "stories"]
+    "rootDirs": ["src", "stories"],
+    "types" : ["webpack-env"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "src/setupTests.ts", "src/**/*.test.*"]
