@@ -1,6 +1,6 @@
 {
   "name": "@ethereum-react-components/ui",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
@@ -30,7 +30,7 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
-    "@ethereum-react-components/cfg": "^1.0.3",
+    "@ethereum-react-components/cfg": "^1.1.0",
     "@storybook/addon-a11y": "^5.2.8",
     "@storybook/addon-actions": "^5.2.8",
     "@storybook/addon-console": "^1.2.1",
@@ -52,7 +52,7 @@
     "tslint-react": "^4.1.0"
   },
   "dependencies": {
-    "@ethereum-react-components/types": "^1.0.4",
+    "@ethereum-react-components/types": "^1.1.0",
     "d3": "^5.14.2",
     "dagre-d3": "^0.6.4",
     "rollup": "^1.27.14",
