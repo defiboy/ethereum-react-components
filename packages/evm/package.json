@@ -29,8 +29,6 @@
     "test": "jest --verbose",
     "check-formatting": "prettier --list-different \"src/**/*.{ts,tsx,js,json}\"",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,json}\"",
-    "build": "rollup -c",
-    "prepublish": "npm run build",
     "test:coverage": "npm run test -- --reporters=default --reporters=jest-junit --coverage",
     "test:coverage:ci": "npm run test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=text-lcov | coveralls"
   },

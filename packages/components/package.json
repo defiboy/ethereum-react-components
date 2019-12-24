@@ -5,6 +5,9 @@
   "main": "lib/index.js",
   "module": "lib/index.es.js",
   "scripts": {
+    "build": "rollup -c",
+    "prepublish": "npm run clean:lib && npm run build",
+    "clean:lib": "rimraf lib",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
