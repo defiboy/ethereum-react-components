@@ -247,8 +247,12 @@ const StyledWrapper = styled.div`
     stroke-width: 1.5px;
   }
   .edgePath path.path {
-    stroke: #333;
+    stroke: #6f6f6f;
     stroke-width: 1.5px;
     fill: none;
+  }
+
+  .edgePath marker path {
+    fill: #6f6f6f;
   }
 `
