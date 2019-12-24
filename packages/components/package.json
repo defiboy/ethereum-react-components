@@ -6,7 +6,7 @@
   "module": "lib/index.es.js",
   "scripts": {
     "build": "rollup -c",
-    "prebuild": "npm run clean:lib && npm run build",
+    "prebuild": "npm run clean:lib",
     "clean:lib": "rimraf lib",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
