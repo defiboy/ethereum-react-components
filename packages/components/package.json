@@ -59,7 +59,8 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-svg": "^2.0.0",
-    "rollup-plugin-typescript2": "^0.25.3"
+    "rollup-plugin-typescript2": "^0.25.3",
+    "typescript": "^3.7.4"
   },
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
 }
