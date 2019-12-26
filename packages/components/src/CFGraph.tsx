@@ -3,6 +3,7 @@ import dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import styled from 'styled-components'
 import { OperationBlock, Operation } from '@ethereum-react-components/types'
+import { Selection } from 'd3-selection'
 
 export interface ICFGraphProps {
   blocks: OperationBlock[]
@@ -17,16 +18,19 @@ export interface ICFGraphProps {
     stack?: string[]
     storage?: any
   }>
+  options?: IGraphOptions
   operationSelected?: (op: Operation) => void
+}
+
+export interface IGraphOptions {
+  dir: 'LR' | 'TB'
 }
 
 export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
   const [activeBlocks, setActiveBlocks] = React.useState()
   React.useEffect(() => {
     clearGraph()
-    setTimeout(() => {
-      renderGraph()
-    }, 200)
+    renderGraph()
   }, [props.blocks])
 
   const svgElem = React.useRef<SVGSVGElement>(null)
@@ -40,33 +44,111 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
   }
 
   const isInTrace = (op: Operation) => {
-    return props.trace && props.trace.find(t => t.pc === op.offset)
+    return props.trace && !!props.trace.find(t => t.pc === op.offset)
+  }
+
+  const offsetColWidth = 60
+  const opNameColWidth = 120
+  const argumentColWidth = 120
+  const rowHeight = 24
+  const letterWidth = 6.5 // approx for Arial 12px
+  const nodePadding = 4
+
+  const cellRenderer = (
+    selection: Selection<d3.EnterElement, Operation, SVGElement, undefined>,
+    key: string,
+    width: number,
+    xPos: number
+  ) => {
+    const cells = selection
+      .append('rect')
+      .attr('id', d => d.offset + '-' + key)
+      .attr('width', width)
+      .attr('height', rowHeight)
+      .attr('x', xPos)
+      .attr('y', (d, i) => i * rowHeight)
+      .classed('active-item', d => isInTrace(d))
+
+    if (props.operationSelected) {
+      cells.on('click', d => opSelected(d))
+    }
+  }
+
+  const textRenderer = (
+    selection: Selection<d3.EnterElement, Operation, SVGElement, undefined>,
+    key: string,
+    textResolver,
+    width: number,
+    xPos: number
+  ) => {
+    const cells = selection
+      .append('text')
+      .attr('id', d => d.offset + '-' + key + 'text')
+      .attr('x', xPos + width / 2)
+      .attr('y', (d, i) => i * rowHeight + rowHeight / 2)
+      .attr('text-anchor', 'middle')
+      .attr('alignment-baseline', 'central')
+      .attr('font-family', 'Arial')
+      .attr('font-size', '12')
+      .text(d => textResolver(d))
+
+    if (props.operationSelected) {
+      cells.on('click', d => opSelected(d))
+    }
+  }
+
+  const getOperationArg = (op: Operation) => {
+    return op.opcode.name.startsWith('PUSH') ? '0x' + op.argument.toString(16).toUpperCase() : ''
+  }
+
+  const renderOpRowsOutline = (
+    g: Selection<SVGGElement, undefined, null, undefined>,
+    operations: Operation[],
+    options
+  ) => {
+    const selection = g
+      .selectAll('rect')
+      .data(operations)
+      .enter()
+
+    cellRenderer(selection, 'offset', offsetColWidth, 0)
+    cellRenderer(selection, 'op', opNameColWidth, offsetColWidth)
+    cellRenderer(selection, 'argument', options.argumentColLength, offsetColWidth + opNameColWidth)
+  }
+
+  const renderText = (g: Selection<SVGGElement, undefined, null, undefined>, operations: Operation[], options) => {
+    const selection = g
+      .selectAll('text')
+      .data(operations)
+      .enter()
+
+    textRenderer(selection, 'offset', d => '0x' + d.offset.toString(16).toUpperCase(), offsetColWidth, 0)
+    textRenderer(selection, 'op', d => d.opcode.name.toUpperCase(), opNameColWidth, offsetColWidth)
+    textRenderer(
+      selection,
+      'argument',
+      d => getOperationArg(d),
+      options.argumentColLength,
+      offsetColWidth + opNameColWidth
+    )
   }
 
   const renderBlock = (block: OperationBlock, graph: dagreD3.graphlib.Graph) => {
+    const svgWrap = d3.create('svg')
+    const g = svgWrap.append('g')
+
+    const maxArgLength = block.operations.reduce((max, op) => {
+      return Math.max(max, getOperationArg(op).length)
+    }, 0)
+
+    const options = { argumentColLength: Math.max(maxArgLength * letterWidth + 20, argumentColWidth) }
+
+    renderOpRowsOutline(g, block.operations, options)
+    renderText(g, block.operations, options)
+
     graph.setNode(block.offset.toString(), {
-      label: () => {
-        const table = document.createElement('table')
-        const tableE = d3.select(table)
-        tableE.classed('graph__block-table', true)
-        // tslint:disable-next-line:prefer-for-of
-        for (let index = 0; index < block.operations.length; index++) {
-          const op = block.operations[index]
-          const tr = tableE.append('tr')
-          tr.append('td').text('0x' + op.offset.toString(16).toUpperCase())
-          // tr.append("td").text(op.opcode.opcode);
-          tr.append('td').text(op.opcode.name.toUpperCase())
-          tr.append('td').text(op.opcode.name.startsWith('PUSH') ? '0x' + op.argument.toString(16).toUpperCase() : '')
-
-          if (isInTrace(op)) {
-            tr.classed('acive-item', true)
-          }
-
-          tr.on('click', () => opSelected(op))
-        }
-
-        return table
-      }
+      label: g.node(), labelType: 'svg',
+      paddingLeft: nodePadding, paddingRight: nodePadding, paddingTop: nodePadding, paddingBottom: nodePadding
     })
   }
 
@@ -109,8 +191,6 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     // Run the renderer. This is what draws the final graph.
     render(inner as any, g)
 
-    d3.selectAll('foreignObject > div').classed('node-wrapper', true)
-
     // // Center the graph
     // const initialScale = 1
     // svg.call(
@@ -134,43 +214,32 @@ const StyledWrapper = styled.div`
     border: 1.5px solid #999;
     overflow: hidden;
   }
+
   .node {
     white-space: nowrap;
   }
 
   .node .label-container {
-    stroke: none;
-  }
-
-  .node .label table {
-    border-collapse: collapse;
-    margin: auto;
-  }
-
-  .node .label .node-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex !important;
-  }
-
-  th,
-  td {
-    border: 1.6px solid orange;
-    padding: 10px;
-    text-align: left;
-  }
-
-  .acive-item {
-    background: gray;
+    stroke: #7a7a7a;
   }
 
   .node rect,
   .node circle,
   .node ellipse {
-    stroke: #333;
+    stroke: #c6c6c6;
     fill: #fff;
-    stroke-width: 1.5px;
+    stroke-width: 1px;
+    cursor: pointer;
   }
+
+  .node text {
+    cursor: pointer;
+  }
+
+  .node .active-item {
+    fill: #eaeaea;
+  }
+
   .cluster rect {
     stroke: #333;
     fill: #000;
@@ -178,8 +247,12 @@ const StyledWrapper = styled.div`
     stroke-width: 1.5px;
   }
   .edgePath path.path {
-    stroke: #333;
+    stroke: #6f6f6f;
     stroke-width: 1.5px;
     fill: none;
+  }
+
+  .edgePath marker path {
+    fill: #6f6f6f;
   }
 `
