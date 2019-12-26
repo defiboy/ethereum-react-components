@@ -147,8 +147,12 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     renderText(g, block.operations, options)
 
     graph.setNode(block.offset.toString(), {
-      label: g.node(), labelType: 'svg',
-      paddingLeft: nodePadding, paddingRight: nodePadding, paddingTop: nodePadding, paddingBottom: nodePadding
+      label: g.node(),
+      labelType: 'svg',
+      paddingLeft: nodePadding,
+      paddingRight: nodePadding,
+      paddingTop: nodePadding,
+      paddingBottom: nodePadding
     })
   }
 
