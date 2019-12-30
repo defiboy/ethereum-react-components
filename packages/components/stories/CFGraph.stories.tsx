@@ -1,5 +1,5 @@
 import React from 'react'
-import { CFGraph, ICFGraphProps } from '../src/CFGraph'
+import { CFGraph, ICFGraphProps } from '../src'
 import { withKnobs, text, object } from "@storybook/addon-knobs"
 import { ControlFlowGraphCreator } from '@ethereum-react-components/cfg';
 import { storiesOf } from '@storybook/react';

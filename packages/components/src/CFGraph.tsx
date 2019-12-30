@@ -1,30 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import styled from 'styled-components'
 import { OperationBlock, Operation } from '@ethereum-react-components/types'
 import { Selection } from 'd3-selection'
-
-export interface ICFGraphProps {
-  blocks: OperationBlock[]
-  trace?: Array<{
-    depth: number
-    error?: any
-    gas: string
-    gasCost: string
-    memory: string[]
-    op: string
-    pc: number
-    stack?: string[]
-    storage?: any
-  }>
-  options?: IGraphOptions
-  operationSelected?: (op: Operation) => void
-}
-
-export interface IGraphOptions {
-  dir: 'LR' | 'TB'
-}
+import { ICFGraphProps } from './types'
 
 export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
   const [activeBlocks, setActiveBlocks] = React.useState()
@@ -206,7 +186,7 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 
   return (
     <StyledWrapper>
-      <svg ref={svgElem} id="graph" width="100%" height="80vh">
+      <svg ref={svgElem} id="graph" width="100%" height="100%">
         <g ref={innerElem} />
       </svg>
     </StyledWrapper>
@@ -214,6 +194,7 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 }
 
 const StyledWrapper = styled.div`
+  height: 100%;
   svg {
     border: 1.5px solid #999;
     overflow: hidden;
