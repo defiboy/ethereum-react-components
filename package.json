@@ -36,6 +36,7 @@
     "compile:cfg": "lerna run compile --scope=@ethereum-react-components/cfg",
     "compile:cfg-utilities": "lerna run compile --scope=@ethereum-react-components/cfg-utilities",
     "compile:evm": "lerna run compile --scope=@ethereum-react-components/evm",
+    "compile:ui": "lerna run compile --scope=@ethereum-react-components/ui",
     "test:disassembler": "lerna run test --scope=@ethereum-react-components/disassembler",
     "test:cfg-utilities": "lerna run test --scope=@ethereum-react-components/cfg-utilities",
     "test:cfg": "lerna run test --scope=@ethereum-react-components/cfg",

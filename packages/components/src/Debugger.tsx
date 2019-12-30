@@ -98,13 +98,12 @@ const StorageTable: React.FC<IStorageTableProps> = (props: IStorageTableProps) =
 export const Container = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 70% 15% 10%;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 80% 20%;
   grid-row-gap: 0.4px;
   grid-template-areas:
-    'graph graph'
-    'memory stack'
-    'storage storage';
+    'graph graph graph graph'
+    'memory stack storage storage';
 `
 
 export const GraphContainer = styled.section`
