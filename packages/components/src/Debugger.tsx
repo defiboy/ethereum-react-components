@@ -48,21 +48,21 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
         <h4>Memory</h4>
         {memory &&
           memory.length > 0 &&
-          memory.map(item => {
-            return <p>{item}</p>
+          memory.map((item, index) => {
+            return <p key={index}>{item}</p>
           })}
       </MemoryDiv>
       <StackDiv>
         <h4>Stack</h4>
         {stack &&
           stack.length > 0 &&
-          stack.map(item => {
-            return <p>{item}</p>
+          stack.map((item, index) => {
+            return <p key={index}>{item}</p>
           })}
       </StackDiv>
       <StorageDiv>
         <h4>Storage</h4>
-        {storage && <StorageTable storage={storage}></StorageTable>}
+        {storage && <StorageTable storage={storage} />}
       </StorageDiv>
     </Container>
   )
@@ -84,7 +84,7 @@ const StorageTable: React.FC<IStorageTableProps> = (props: IStorageTableProps) =
       <tbody>
         {Object.keys(props.storage).map((item, index) => {
           return (
-            <tr>
+            <tr key={index}>
               <td>{item}</td>
               <td>{props.storage[item]}</td>
             </tr>

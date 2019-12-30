@@ -1,7 +1,6 @@
 {
     "extends": [
-        "../../tslint.json",
-        "tslint-react"
+        "../../tslint.json"
     ],
     "rules": {}
 }

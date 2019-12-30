@@ -2,7 +2,7 @@ import { OperationBlock, Operation } from '@ethereum-react-components/types'
 
 export interface IDebuggerProps {
   bytecode: string
-  traces: Array<Trace>
+  traces: Trace[]
 }
 
 export interface Trace {
@@ -19,7 +19,7 @@ export interface Trace {
 
 export interface ICFGraphProps {
   blocks: OperationBlock[]
-  trace?: Array<Trace>
+  trace?: Trace[]
   options?: IGraphOptions
   operationSelected?: (op: Operation) => void
 }
