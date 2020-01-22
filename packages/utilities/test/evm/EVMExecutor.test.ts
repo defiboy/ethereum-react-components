@@ -1,5 +1,5 @@
 import { EVMDisassembler, IDisassembler } from '../../src/disassembler'
-import { getCFGBlocksFromOperations } from '../../src/utilities'
+import { getCFGBlocksFromOperations } from '../../src/cfg'
 import { EVMExecutor, Word } from '../../src/evm'
 
 import { Operation } from '@ethereum-react/types'

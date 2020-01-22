@@ -1,4 +1,4 @@
-import { ControlFlowGraphCreator } from '../src'
+import { ControlFlowGraphCreator } from '../../src'
 
 describe('ControlFlowGraphCreator tests', () => {
   let controlFlowGraphInstance: ControlFlowGraphCreator

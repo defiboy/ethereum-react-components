@@ -1,3 +1,3 @@
-export * from "./cfg/BlockCreator";
+export * from "./cfg";
 export * from "./disassembler";
 export * from "./evm";
