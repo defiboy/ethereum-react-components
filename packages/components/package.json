@@ -1,5 +1,5 @@
 {
-  "name": "@ethereum-react-components/ui",
+  "name": "@ethereum-react/components",
   "version": "1.4.1",
   "description": "",
   "main": "lib/index.js",
@@ -57,7 +57,7 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "@ethereum-react-components/types": "^1.1.0",
+    "@ethereum-react/types": "^1.1.0",
     "d3": "^5.14.2",
     "dagre-d3": "^0.6.4"
   },

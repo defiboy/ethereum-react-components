@@ -2,7 +2,7 @@ import React from 'react'
 import dagreD3 from 'dagre-d3'
 import * as d3 from 'd3'
 import styled from 'styled-components'
-import { OperationBlock, Operation } from '@ethereum-react-components/types'
+import { OperationBlock, Operation } from '@ethereum-react/types'
 import { Selection } from 'd3-selection'
 import { ICFGraphProps } from './types'
 

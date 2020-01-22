@@ -1,7 +1,7 @@
 {
-  "name": "@ethereum-react/types",
-  "version": "1.1.0",
-  "description": "Types",
+  "name": "@ethereum-react/utilities",
+  "version": "1.2.0",
+  "description": "> TODO: description",
   "author": "Solid Studio <solidstudio@labchain.io>",
   "homepage": "https://github.com/solid-studio/ethereum-react-components#readme",
   "license": "ISC",
@@ -10,12 +10,12 @@
     "lib": "lib",
     "test": "test"
   },
-  "files": [
-    "lib"
-  ],
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/solid-studio/ethereum-react-components.git"
@@ -35,5 +35,14 @@
   "bugs": {
     "url": "https://github.com/solid-studio/ethereum-react-components/issues"
   },
-  "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159"
+  "dependencies": {
+    "@ethereum-react/types": "^1.1.0",
+    "axios": "^0.19.2",
+    "bn.js": "^5.0.0"
+  },
+  "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^0.19.2"
+  }
 }

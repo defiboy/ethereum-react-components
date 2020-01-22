@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { ControlFlowGraphCreator } from '@ethereum-react-components/cfg'
-import { Operation, OperationBlock } from '@ethereum-react-components/types'
+import { Operation, OperationBlock } from '@ethereum-react/types'
 
 import { IDebuggerProps, Trace } from './types'
 import { CFGraph } from './CFGraph'

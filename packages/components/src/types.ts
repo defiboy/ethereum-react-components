@@ -1,4 +1,4 @@
-import { OperationBlock, Operation } from '@ethereum-react-components/types'
+import { OperationBlock, Operation } from '@ethereum-react/types'
 
 export interface IDebuggerProps {
   bytecode: string

@@ -3,7 +3,7 @@ import { CFGraph, ICFGraphProps } from '../src'
 import { withKnobs, text, object } from "@storybook/addon-knobs"
 import { ControlFlowGraphCreator } from '@ethereum-react-components/cfg';
 import { storiesOf } from '@storybook/react';
-import { OperationBlock } from '@ethereum-react-components/types';
+import { OperationBlock } from '@ethereum-react/types';
 import { action } from '@storybook/addon-actions'
 
 storiesOf('CFG', module)

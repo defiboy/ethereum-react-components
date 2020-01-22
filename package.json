@@ -31,15 +31,11 @@
     "test:all:coverage:ci": "lerna run test:coverage:ci",
     "test:all:watch": "lerna run test:watch",
     "compile:all": "lerna run compile",
-    "compile:types": "lerna run compile --scope=@ethereum-react-components/types",
-    "compile:disassembler": "lerna run compile --scope=@ethereum-react-components/disassembler",
-    "compile:cfg": "lerna run compile --scope=@ethereum-react-components/cfg",
-    "compile:cfg-utilities": "lerna run compile --scope=@ethereum-react-components/cfg-utilities",
-    "compile:evm": "lerna run compile --scope=@ethereum-react-components/evm",
-    "compile:ui": "lerna run compile --scope=@ethereum-react-components/ui",
-    "test:disassembler": "lerna run test --scope=@ethereum-react-components/disassembler",
-    "test:cfg-utilities": "lerna run test --scope=@ethereum-react-components/cfg-utilities",
-    "test:cfg": "lerna run test --scope=@ethereum-react-components/cfg",
-    "test:evm": "lerna run test --scope=@ethereum-react-components/evm"
+    "compile:utilities": "lerna run compile --scope=@ethereum-react/utilities",
+    "compile:components": "lerna run compile --scope=@ethereum-react/components",
+    "compile:types": "lerna run compile --scope=@ethereum-react/types",
+    "test:utilities": "lerna run test --scope=@ethereum-react/cfg-utilities",
+    "test:components": "lerna run test --scope=@ethereum-react/components",
+    "test:types": "lerna run test --scope=@ethereum-react/types"
   }
 }
