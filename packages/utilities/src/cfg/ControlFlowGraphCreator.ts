@@ -24,10 +24,10 @@ export class ControlFlowGraphCreator {
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
-            bytecode: disassembleContract.constructor,
-            rawBytecode: disassembleContract.bytecode
-          }
+              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
+              bytecode: disassembleContract.constructor,
+              rawBytecode: disassembleContract.bytecode
+            }
           : undefined
       };
       return controlFlowGraph;
