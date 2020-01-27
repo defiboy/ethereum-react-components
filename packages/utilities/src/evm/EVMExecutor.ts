@@ -1,5 +1,4 @@
-import { Opcodes, Operation, OperationBlock } from "@ethereum-react/types";
-import { CFGBlocks } from "@ethereum-react/types/src/CFGBlocks";
+import { Opcodes, Operation, OperationBlock, CFGBlocks } from "@ethereum-react/types";
 
 import { Executor } from "./operations/Executor";
 import { OpcodeExecutor } from "./operations/OpcodeExecutor";
