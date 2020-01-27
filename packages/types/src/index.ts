@@ -5,3 +5,4 @@ export { OperationBlock } from "./OperationBlock";
 export { Opcodes } from "./Opcodes";
 export { CFGBlocks } from "./CFGBlocks";
 export { ControlFlowGraph } from "./ControlFlowGraph";
+export { CompilerVersion } from './CompilerVersion'

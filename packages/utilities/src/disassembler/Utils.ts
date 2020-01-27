@@ -1,3 +1,5 @@
+import { CompilerVersion } from "@ethereum-react/types";
+
 export const METADATA_PREFIX_V1 = "a165627a7a72305820";
 export const METADATA_PREFIX_V2 = "a265627a7a72305820";
 
@@ -37,3 +39,14 @@ export const getCleanedBytecode = (bytecode: string): string => {
 
   return code;
 };
+
+export const getSplitOpCode = (compilerVersion: CompilerVersion) => {
+  switch (compilerVersion) {
+    case CompilerVersion.SOLIDITY_4:
+      return "STOP";
+    case CompilerVersion.SOLIDITY_5:
+      return 'INVALID'
+    default:
+      throw new Error('Unsupported version')
+  }
+}

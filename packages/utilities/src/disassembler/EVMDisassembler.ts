@@ -1,27 +1,21 @@
-import { Opcode, Opcodes, Operation } from "@ethereum-react/types";
+import { Opcode, Opcodes, Operation, CompilerVersion } from "@ethereum-react/types";
 
 import { DisassembledContract } from "./DisassembledContract";
-import { getCleanedBytecode } from "./Utils";
+import { getCleanedBytecode, getSplitOpCode } from "./Utils";
 import { IDisassembler } from "./IDisassembler";
 
 // tslint:disable-next-line
 const BN = require("bn.js");
 
 export class EVMDisassembler implements IDisassembler {
-  public disassembleContract(bytecode: string): DisassembledContract {
+  public disassembleContract(bytecode: string, compilerVersion: CompilerVersion = CompilerVersion.SOLIDITY_4): DisassembledContract {
     const code = getCleanedBytecode(bytecode);
     const operations: Operation[] = this.disassembleBytecode(code);
     const hasConstructor = operations.filter(op => op.opcode.name === "CODECOPY").length > 0;
     let constructor: Operation[] = [];
     let runtime = operations;
     if (hasConstructor) {
-      let splitOpcode = "STOP";
-      splitOpcode = "INVALID";
-      // TODO
-      // if (isVersion5OrAbove()) {
-      //   splitOpcode = 'INVALID'
-      // } Can Remix give me the right version?
-      // can I get constructor bytecode and runtime bytecode from compiler?
+      let splitOpcode = getSplitOpCode(compilerVersion)
       const firstStopIndex = operations.findIndex(op => op.opcode.name === splitOpcode);
       constructor = operations.slice(0, firstStopIndex + 1);
       runtime = this.adjustRuntimeOffset(operations.slice(firstStopIndex + 1, operations.length));
