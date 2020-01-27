@@ -8,14 +8,17 @@ import { IDisassembler } from "./IDisassembler";
 const BN = require("bn.js");
 
 export class EVMDisassembler implements IDisassembler {
-  public disassembleContract(bytecode: string, compilerVersion: CompilerVersion = CompilerVersion.SOLIDITY_4): DisassembledContract {
+  public disassembleContract(
+    bytecode: string,
+    compilerVersion: CompilerVersion = CompilerVersion.SOLIDITY_4
+  ): DisassembledContract {
     const code = getCleanedBytecode(bytecode);
     const operations: Operation[] = this.disassembleBytecode(code);
     const hasConstructor = operations.filter(op => op.opcode.name === "CODECOPY").length > 0;
     let constructor: Operation[] = [];
     let runtime = operations;
     if (hasConstructor) {
-      let splitOpcode = getSplitOpCode(compilerVersion)
+      const splitOpcode = getSplitOpCode(compilerVersion);
       const firstStopIndex = operations.findIndex(op => op.opcode.name === splitOpcode);
       constructor = operations.slice(0, firstStopIndex + 1);
       runtime = this.adjustRuntimeOffset(operations.slice(firstStopIndex + 1, operations.length));

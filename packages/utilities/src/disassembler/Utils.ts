@@ -45,8 +45,8 @@ export const getSplitOpCode = (compilerVersion: CompilerVersion) => {
     case CompilerVersion.SOLIDITY_4:
       return "STOP";
     case CompilerVersion.SOLIDITY_5:
-      return 'INVALID'
+      return "INVALID";
     default:
-      throw new Error('Unsupported version')
+      throw new Error("Unsupported version");
   }
-}
+};

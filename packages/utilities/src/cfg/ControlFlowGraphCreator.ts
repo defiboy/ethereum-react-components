@@ -24,10 +24,10 @@ export class ControlFlowGraphCreator {
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
-            bytecode: disassembleContract.constructor,
-            rawBytecode: disassembleContract.bytecode
-          }
+              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
+              bytecode: disassembleContract.constructor,
+              rawBytecode: disassembleContract.bytecode
+            }
           : undefined
       };
       return controlFlowGraph;
@@ -38,7 +38,10 @@ export class ControlFlowGraphCreator {
 
   public buildControlFlowGraph(bytecode: string, compilerVersion: CompilerVersion): ControlFlowGraph {
     try {
-      const disassembleContract: DisassembledContract = this.disassembler.disassembleContract(bytecode, compilerVersion);
+      const disassembleContract: DisassembledContract = this.disassembler.disassembleContract(
+        bytecode,
+        compilerVersion
+      );
       const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtime);
 
       const controlFlowGraph: ControlFlowGraph = {
@@ -49,10 +52,10 @@ export class ControlFlowGraphCreator {
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
-            bytecode: disassembleContract.constructor,
-            rawBytecode: disassembleContract.bytecode
-          }
+              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
+              bytecode: disassembleContract.constructor,
+              rawBytecode: disassembleContract.bytecode
+            }
           : undefined
       };
       return controlFlowGraph;
