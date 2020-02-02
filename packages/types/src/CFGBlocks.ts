@@ -5,7 +5,6 @@ interface CFGBlock {
 }
 
 export class CFGBlocks {
-
   public blocks: CFGBlock = {}; // offset : OperationBlock
 
   public push(block: OperationBlock, offset: number) {

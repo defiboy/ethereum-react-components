@@ -24,10 +24,10 @@ export class ControlFlowGraphCreator {
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructorOperations),
-            operations: disassembleContract.constructorOperations,
-            rawBytecode: disassembleContract.bytecode
-          }
+              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructorOperations),
+              operations: disassembleContract.constructorOperations,
+              rawBytecode: disassembleContract.bytecode
+            }
           : undefined
       };
       return controlFlowGraph;
@@ -52,10 +52,10 @@ export class ControlFlowGraphCreator {
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructorOperations),
-            operations: disassembleContract.constructorOperations,
-            rawBytecode: disassembleContract.bytecode
-          }
+              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructorOperations),
+              operations: disassembleContract.constructorOperations,
+              rawBytecode: disassembleContract.bytecode
+            }
           : undefined
       };
       return controlFlowGraph;
