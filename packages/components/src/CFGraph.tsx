@@ -1,9 +1,9 @@
-import React from "react"
-import dagreD3 from "dagre-d3"
-import * as d3 from "d3"
-import styled from "styled-components"
-import { OperationBlock, Operation, CFGBlocks, TransactionTrace } from "@ethereum-react/types"
-import { Selection } from "d3-selection"
+import React from 'react'
+import dagreD3 from 'dagre-d3'
+import * as d3 from 'd3'
+import styled from 'styled-components'
+import { OperationBlock, Operation, CFGBlocks, TransactionTrace } from '@ethereum-react/types'
+import { Selection } from 'd3-selection'
 
 export interface ICFGraphProps {
   blocks: CFGBlocks
@@ -14,7 +14,7 @@ export interface ICFGraphProps {
 }
 
 export interface IGraphOptions {
-  dir: "LR" | "TB"
+  dir: 'LR' | 'TB'
 }
 
 const offsetColWidth = 60
@@ -37,8 +37,8 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 
   const renderGraph = () => {
     const g = new dagreD3.graphlib.Graph().setGraph({
-      rankdir: "LR",
-      nodesep: 80,
+      rankdir: 'LR',
+      nodesep: 80
     })
 
     // Create the renderer
@@ -48,12 +48,12 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     const inner = d3.select(innerElemRef.current)
 
     // Set up zoom support
-    const zoom = d3.zoom().on("zoom", () => {
-      inner.attr("transform", d3.event.transform)
+    const zoom = d3.zoom().on('zoom', () => {
+      inner.attr('transform', d3.event.transform)
     })
 
     // clear graph
-    inner.selectAll("*").remove()
+    inner.selectAll('*').remove()
 
     // reset display
     svg.call(zoom.transform, d3.zoomIdentity)
@@ -85,22 +85,16 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     }
   }
 
-  const renderBlock = (
-    block: OperationBlock,
-    graph: dagreD3.graphlib.Graph
-  ) => {
-    const svgWrap = d3.create("svg")
-    const g = svgWrap.append("g")
+  const renderBlock = (block: OperationBlock, graph: dagreD3.graphlib.Graph) => {
+    const svgWrap = d3.create('svg')
+    const g = svgWrap.append('g')
 
     const maxArgLength = block.operations.reduce((max, op) => {
       return Math.max(max, getOperationArg(op).length)
     }, 0)
 
     const options = {
-      argumentColLength: Math.max(
-        maxArgLength * letterWidth + 20,
-        argumentColWidth
-      ),
+      argumentColLength: Math.max(maxArgLength * letterWidth + 20, argumentColWidth)
     }
 
     renderOpRowsOutline(g, block.operations, options)
@@ -108,20 +102,16 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 
     graph.setNode(block.offset.toString(), {
       label: g.node(),
-      labelType: "svg",
+      labelType: 'svg',
       paddingLeft: nodePadding,
       paddingRight: nodePadding,
       paddingTop: nodePadding,
-      paddingBottom: nodePadding,
+      paddingBottom: nodePadding
     })
   }
 
   const isInTrace = (op: Operation) => {
-    return (
-      props.trace &&
-      props.trace.structLogs &&
-      !!props.trace.structLogs.find(t => t.pc === op.offset)
-    )
+    return props.trace && props.trace.structLogs && !!props.trace.structLogs.find(t => t.pc === op.offset)
   }
 
   const cellRenderer = (
@@ -131,16 +121,16 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     xPos: number
   ) => {
     const cells = selection
-      .append("rect")
-      .attr("id", d => d.offset + "-" + key)
-      .attr("width", width)
-      .attr("height", rowHeight)
-      .attr("x", xPos)
-      .attr("y", (d, i) => i * rowHeight)
-      .classed("active-item", d => isInTrace(d))
+      .append('rect')
+      .attr('id', d => d.offset + '-' + key)
+      .attr('width', width)
+      .attr('height', rowHeight)
+      .attr('x', xPos)
+      .attr('y', (d, i) => i * rowHeight)
+      .classed('active-item', d => isInTrace(d))
 
     if (props.operationSelected) {
-      cells.on("click", d => opSelected(d))
+      cells.on('click', d => opSelected(d))
     }
   }
 
@@ -152,25 +142,23 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     xPos: number
   ) => {
     const cells = selection
-      .append("text")
-      .attr("id", d => d.offset + "-" + key + "text")
-      .attr("x", xPos + width / 2)
-      .attr("y", (d, i) => i * rowHeight + rowHeight / 2)
-      .attr("text-anchor", "middle")
-      .attr("alignment-baseline", "central")
-      .attr("font-family", "Arial")
-      .attr("font-size", "12")
+      .append('text')
+      .attr('id', d => d.offset + '-' + key + 'text')
+      .attr('x', xPos + width / 2)
+      .attr('y', (d, i) => i * rowHeight + rowHeight / 2)
+      .attr('text-anchor', 'middle')
+      .attr('alignment-baseline', 'central')
+      .attr('font-family', 'Arial')
+      .attr('font-size', '12')
       .text(d => textResolver(d))
 
     if (props.operationSelected) {
-      cells.on("click", d => opSelected(d))
+      cells.on('click', d => opSelected(d))
     }
   }
 
   const getOperationArg = (op: Operation) => {
-    return op.opcode.name.startsWith("PUSH")
-      ? "0x" + op.argument.toString(16).toUpperCase()
-      : ""
+    return op.opcode.name.startsWith('PUSH') ? '0x' + op.argument.toString(16).toUpperCase() : ''
   }
 
   const renderOpRowsOutline = (
@@ -179,83 +167,46 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
     options
   ) => {
     const selection = g
-      .selectAll("rect")
+      .selectAll('rect')
       .data(operations)
       .enter()
 
-    cellRenderer(selection, "offset", offsetColWidth, 0)
-    cellRenderer(selection, "op", opNameColWidth, offsetColWidth)
-    cellRenderer(
-      selection,
-      "argument",
-      options.argumentColLength,
-      offsetColWidth + opNameColWidth
-    )
+    cellRenderer(selection, 'offset', offsetColWidth, 0)
+    cellRenderer(selection, 'op', opNameColWidth, offsetColWidth)
+    cellRenderer(selection, 'argument', options.argumentColLength, offsetColWidth + opNameColWidth)
   }
 
-  const renderText = (
-    g: Selection<SVGGElement, undefined, null, undefined>,
-    operations: Operation[],
-    options
-  ) => {
+  const renderText = (g: Selection<SVGGElement, undefined, null, undefined>, operations: Operation[], options) => {
     const selection = g
-      .selectAll("text")
+      .selectAll('text')
       .data(operations)
       .enter()
 
+    textRenderer(selection, 'offset', d => '0x' + d.offset.toString(16).toUpperCase(), offsetColWidth, 0)
+    textRenderer(selection, 'op', d => d.opcode.name.toUpperCase(), opNameColWidth, offsetColWidth)
     textRenderer(
       selection,
-      "offset",
-      d => "0x" + d.offset.toString(16).toUpperCase(),
-      offsetColWidth,
-      0
-    )
-    textRenderer(
-      selection,
-      "op",
-      d => d.opcode.name.toUpperCase(),
-      opNameColWidth,
-      offsetColWidth
-    )
-    textRenderer(
-      selection,
-      "argument",
+      'argument',
       d => getOperationArg(d),
       options.argumentColLength,
       offsetColWidth + opNameColWidth
     )
   }
 
-  const renderEdges = (
-    block: OperationBlock,
-    graph: dagreD3.graphlib.Graph
-  ) => {
+  const renderEdges = (block: OperationBlock, graph: dagreD3.graphlib.Graph) => {
     if (block.childA) {
-      graph.setEdge(
-        block.operations[0].offset.toString(),
-        block.childA.toString(),
-        { label: "" }
-      )
+      graph.setEdge(block.operations[0].offset.toString(), block.childA.toString(), { label: '' })
     }
 
     if (block.childB) {
-      graph.setEdge(
-        block.operations[0].offset.toString(),
-        block.childB.toString(),
-        { label: "" }
-      )
+      graph.setEdge(block.operations[0].offset.toString(), block.childB.toString(), { label: '' })
     }
   }
 
   return (
     <StyledWrapper>
       {props.renderTrigger && (
-        <button
-          style={{ position: "fixed" }}
-          id="btn"
-          className="btn btn-primary"
-          onClick={() => renderGraph()}
-        >
+        <button style={{ position: 'fixed' }} id="btn" className="btn btn-primary" onClick={() => renderGraph()}>
           Render CFG
         </button>
       )}

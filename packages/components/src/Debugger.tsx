@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import styled from "styled-components"
+import React, { useState } from 'react'
+import styled from 'styled-components'
 
-import { Operation, CFGBlocks, TransactionTrace, StructLog } from "@ethereum-react/types"
-import { CFGraph } from "./CFGraph"
+import { Operation, CFGBlocks, TransactionTrace, StructLog } from '@ethereum-react/types'
+import { CFGraph } from './CFGraph'
 
 export interface IDebuggerProps {
   blocks: CFGBlocks
@@ -19,17 +19,12 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
   const [gasCost, setGasCost] = useState(0)
 
   const onClick = (op: Operation) => {
-    console.log("Operation clicked", op)
+    console.log('Operation clicked', op)
 
-    if (
-      props.transactionTrace &&
-      props.transactionTrace.structLogs.length > 0
-    ) {
-      const trace = props.transactionTrace.structLogs.find(
-        (item: StructLog) => {
-          return item.pc === op.offset
-        }
-      )
+    if (props.transactionTrace && props.transactionTrace.structLogs.length > 0) {
+      const trace = props.transactionTrace.structLogs.find((item: StructLog) => {
+        return item.pc === op.offset
+      })
 
       setMemory(trace.memory)
       setStack(trace.stack)
@@ -42,9 +37,7 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
   const hasTraces = props.transactionTrace !== undefined
   return (
     <Container>
-      {props.transactionHash && (
-        <h4>Transaction hash: {props.transactionHash}</h4>
-      )}
+      {props.transactionHash && <h4>Transaction hash: {props.transactionHash}</h4>}
       <GraphContainer>
         <CFGraph
           renderTrigger={props.renderTrigger}
@@ -54,32 +47,24 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
         />
       </GraphContainer>
 
-      {hasTraces &&
+      {hasTraces && (
         <MemoryDiv>
-          <h6 style={{ fontWeight: "bold" }}>Memory</h6>
-          {memory.length > 0 &&
-            memory.map((item, index) => (
-              <p key={index}>{item}</p>
-            ))
-          }
+          <h6 style={{ fontWeight: 'bold' }}>Memory</h6>
+          {memory.length > 0 && memory.map((item, index) => <p key={index}>{item}</p>)}
         </MemoryDiv>
-      }
+      )}
 
       {hasTraces && (
         <StackDiv>
-          <h6 style={{ fontWeight: "bold" }}>Stack</h6>
-          {stack.length > 0 &&
-            stack.map((item, index) => (
-              <p key={index}>{item}</p>
-            ))}
+          <h6 style={{ fontWeight: 'bold' }}>Stack</h6>
+          {stack.length > 0 && stack.map((item, index) => <p key={index}>{item}</p>)}
         </StackDiv>
       )}
 
       {hasTraces && (
         <StorageDiv>
-          <h6 style={{ fontWeight: "bold" }}>Storage</h6>
-          {storage &&
-            <StorageTable storage={storage} />}
+          <h6 style={{ fontWeight: 'bold' }}>Storage</h6>
+          {storage && <StorageTable storage={storage} />}
         </StorageDiv>
       )}
     </Container>
@@ -90,9 +75,7 @@ interface IStorageTableProps {
   storage: any
 }
 
-const StorageTable: React.FC<IStorageTableProps> = (
-  props: IStorageTableProps
-) => {
+const StorageTable: React.FC<IStorageTableProps> = (props: IStorageTableProps) => {
   return (
     <table>
       <thead>
@@ -122,15 +105,15 @@ export const Container = styled.div`
   grid-template-rows: 75% 25%;
   grid-row-gap: 0.4px;
   grid-template-areas:
-    "graph graph graph graph"
-    "memory stack storage storage";
+    'graph graph graph graph'
+    'memory stack storage storage';
 `
 
 export const GraphContainer = styled.section`
   grid-area: graph;
   height: 100%;
   width: 100%;
-  border: 1px 
+  border: 1px;
 `
 
 export const DetailsContainer = styled.section`
