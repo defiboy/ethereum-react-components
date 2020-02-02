@@ -1,4 +1,4 @@
-export { DebugTrace } from "./DebugTrace";
+export { TransactionTrace, StructLog } from "./TransactionTrace";
 export { Opcode } from "./Opcode";
 export { Operation } from "./Operation";
 export { OperationBlock } from "./OperationBlock";
