@@ -15,13 +15,13 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
   const [storage, setStorage] = useState({})
   const [gas, setGas] = useState(0)
   const [gasCost, setGasCost] = useState(0)
-  const [blocks, setBlocks] = useState([])
+  // const [blocks, setBlocks] = useState([])
 
-  React.useEffect(() => {
-    console.log('Use effect')
-    const controlFlowGraph = new ControlFlowGraphCreator().buildControlFlowGraphFromBytecode(props.bytecode)
-    setBlocks((controlFlowGraph.contractRuntime.blocks.values() as any) as OperationBlock[])
-  }, [])
+  // React.useEffect(() => {
+  //   console.log('Use effect')
+  //   const controlFlowGraph = new ControlFlowGraphCreator().buildControlFlowGraphFromBytecode(props.bytecode)
+  //   setBlocks((controlFlowGraph.contractRuntime.blocks.values() as any) as OperationBlock[])
+  // }, [])
 
   const onClick = (op: Operation) => {
     console.log('Operation clicked', op)
@@ -42,7 +42,7 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
   return (
     <Container>
       <GraphContainer>
-        <CFGraph trace={props.traces} blocks={blocks} operationSelected={op => onClick(op)} />
+        <CFGraph trace={props.traces} blocks={props.blocks} operationSelected={op => onClick(op)} />
       </GraphContainer>
       <MemoryDiv>
         <h4>Memory</h4>

@@ -30,6 +30,7 @@
     "check-formatting": "prettier --list-different \"src/**/*.{ts,tsx,js,json}\"",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,json}\"",
     "test:coverage": "npm run test -- --reporters=default --reporters=jest-junit --coverage",
+    "test:coverage:ci": "npm run test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=text-lcov | coveralls",
     "test:coverage:ci": "npm run test -- --reporters=default --reporters=jest-junit --coverage --coverageReporters=text-lcov | coveralls"
   },
   "bugs": {
@@ -44,6 +45,7 @@
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159",
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "jest": "^25.1.0"
   }
 }

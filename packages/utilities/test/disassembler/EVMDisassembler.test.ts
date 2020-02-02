@@ -85,6 +85,26 @@ describe('Disassembler test', () => {
     expect(contract.bytecode).toEqual(bytecode)
   })
 
+  it.skip('Test disassemble contract with version 5.16', () => {
+    const bytecode = '6080604052348015600f57600080fd5b506004361060325760003560e01c8063209652551460375780635524107714604f575b600080fd5b603d606b565b60408051918252519081900360200190f35b606960048036036020811015606357600080fd5b50356071565b005b60005490565b60005556fea265627a7a72315820a4b47dcb545f17ba5f5b036db7eb3b5f0cd57b8441515135e18f3fe1f87ed3cb64736f6c63430005100032'
+    const contract: DisassembledContract = disassemblerInstance.disassembleContract(bytecode, CompilerVersion.SOLIDITY_5)
+    console.log("CONTRACT", contract)
+    // const constructor = contract.constructor
+    // const runtime = contract.runtime
+    // const firstConstructor = constructor[0]
+    // const lastConstructor = constructor[constructor.length - 1]
+    // const firstRuntime = runtime[0]
+    // const lastRuntime = runtime[runtime.length - 1]
+    // expect(contract.hasConstructor).toBeTruthy()
+    // expect(firstConstructor.opcode.name).toEqual('PUSH1')
+    // expect(lastConstructor.opcode.name).toEqual('INVALID')
+    // expect(firstRuntime.opcode.name).toEqual('PUSH1')
+    // expect(lastRuntime.opcode.name).toEqual('INVALID')
+    // expect(firstConstructor.offset).toEqual(0)
+    // expect(firstRuntime.offset).toEqual(0)
+    // expect(contract.bytecode).toEqual(bytecode)
+  })
+
   it('Test disassemble contract only runtime', () => {
     const bytecode = '60806040'
     const contract: DisassembledContract = disassemblerInstance.disassembleContract(bytecode)

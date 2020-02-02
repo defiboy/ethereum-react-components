@@ -1,7 +1,7 @@
 import { OperationBlock, Operation } from '@ethereum-react/types'
 
 export interface IDebuggerProps {
-  bytecode: string
+  blocks: OperationBlock[]
   traces: Trace[]
 }
 

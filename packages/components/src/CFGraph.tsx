@@ -194,50 +194,52 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 }
 
 const StyledWrapper = styled.div`
-  height: 100%;
-  svg {
-    border: 1.5px solid #999;
-    overflow: hidden;
-  }
+    svg {
+      border: 1.5px solid #999;
+      overflow: hidden;
+      width: 100%; 
+      height: 60vh;
+    }
 
-  .node {
-    white-space: nowrap;
-  }
+    .node {
+      white-space: nowrap;
+    }
 
-  .node .label-container {
-    stroke: #7a7a7a;
-  }
+    .node .label-container {
+      stroke: #7a7a7a;
+    }
 
-  .node rect,
-  .node circle,
-  .node ellipse {
-    stroke: #c6c6c6;
-    fill: #fff;
-    stroke-width: 1px;
-    cursor: pointer;
-  }
+    .node rect,
+    .node circle,
+    .node ellipse {
+      stroke: #c6c6c6;
+      fill: #fff;
+      stroke-width: 1px;
+      cursor: pointer;
+    }
 
-  .node text {
-    cursor: pointer;
-  }
+    .node text {
+      cursor: pointer;
+    }
 
-  .node .active-item {
-    fill: #eaeaea;
-  }
+    .node .active-item {
+      fill: #eaeaea;
+    }
 
-  .cluster rect {
-    stroke: #333;
-    fill: #000;
-    fill-opacity: 0.1;
-    stroke-width: 1.5px;
-  }
-  .edgePath path.path {
-    stroke: #6f6f6f;
-    stroke-width: 1.5px;
-    fill: none;
-  }
+    .cluster rect {
+      stroke: #333;
+      fill: #000;
+      fill-opacity: 0.1;
+      stroke-width: 1.5px;
+    }
 
-  .edgePath marker path {
-    fill: #6f6f6f;
-  }
+    .edgePath path.path {
+      stroke: #6f6f6f;
+      stroke-width: 1.5px;
+      fill: none;
+    }
+
+    .edgePath marker path {
+      fill: #6f6f6f;
+    }
 `
