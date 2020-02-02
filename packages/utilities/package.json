@@ -1,6 +1,6 @@
 {
   "name": "@ethereum-react/utilities",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "> TODO: description",
   "author": "Solid Studio <solidstudio@labchain.io>",
   "homepage": "https://github.com/solid-studio/ethereum-react-components#readme",
@@ -36,7 +36,7 @@
     "url": "https://github.com/solid-studio/ethereum-react-components/issues"
   },
   "dependencies": {
-    "@ethereum-react/types": "^1.3.0",
+    "@ethereum-react/types": "^1.4.0",
     "axios": "^0.19.2",
     "bn.js": "^5.0.0",
     "ethereumjs-util": "^6.2.0"
