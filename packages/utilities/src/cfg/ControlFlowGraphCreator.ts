@@ -14,20 +14,20 @@ export class ControlFlowGraphCreator {
   public buildControlFlowGraphFromBytecode(bytecode: string): ControlFlowGraph {
     try {
       const disassembleContract: DisassembledContract = this.disassembler.disassembleContract(bytecode);
-      const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtime);
+      const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtimeOperations);
 
       const controlFlowGraph: ControlFlowGraph = {
         contractRuntime: {
           blocks: runtimeBlocks,
-          bytecode: disassembleContract.runtime,
+          operations: disassembleContract.runtimeOperations,
           rawBytecode: disassembleContract.runtimeBytecode
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
-              bytecode: disassembleContract.constructor,
-              rawBytecode: disassembleContract.bytecode
-            }
+            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructorOperations),
+            operations: disassembleContract.constructorOperations,
+            rawBytecode: disassembleContract.bytecode
+          }
           : undefined
       };
       return controlFlowGraph;
@@ -42,20 +42,20 @@ export class ControlFlowGraphCreator {
         bytecode,
         compilerVersion
       );
-      const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtime);
+      const runtimeBlocks = this.getControlFlowGraphBlocks(disassembleContract.runtimeOperations);
 
       const controlFlowGraph: ControlFlowGraph = {
         contractRuntime: {
           blocks: runtimeBlocks,
-          bytecode: disassembleContract.runtime,
+          operations: disassembleContract.runtimeOperations,
           rawBytecode: disassembleContract.runtimeBytecode
         },
         contractConstructor: disassembleContract.hasConstructor
           ? {
-              blocks: this.getControlFlowGraphBlocks(disassembleContract.constructor),
-              bytecode: disassembleContract.constructor,
-              rawBytecode: disassembleContract.bytecode
-            }
+            blocks: this.getControlFlowGraphBlocks(disassembleContract.constructorOperations),
+            operations: disassembleContract.constructorOperations,
+            rawBytecode: disassembleContract.bytecode
+          }
           : undefined
       };
       return controlFlowGraph;

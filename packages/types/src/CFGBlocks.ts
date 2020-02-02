@@ -1,7 +1,12 @@
 import { OperationBlock } from "./OperationBlock";
 
+interface CFGBlock {
+  [key: number]: OperationBlock;
+}
+
 export class CFGBlocks {
-  public blocks = {};
+
+  public blocks: CFGBlock = {}; // offset : OperationBlock
 
   public push(block: OperationBlock, offset: number) {
     this.blocks[offset] = block;

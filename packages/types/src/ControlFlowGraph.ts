@@ -3,12 +3,12 @@ import { Operation } from "./Operation";
 
 export interface ControlFlowGraph {
   contractConstructor?: {
-    bytecode: Operation[];
+    operations: Operation[];
     blocks: CFGBlocks;
     rawBytecode;
   };
   contractRuntime: {
-    bytecode: Operation[];
+    operations: Operation[];
     blocks: CFGBlocks;
     rawBytecode: string;
   };

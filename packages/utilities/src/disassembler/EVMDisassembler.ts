@@ -26,8 +26,8 @@ export class EVMDisassembler implements IDisassembler {
     return {
       bytecode,
       hasConstructor,
-      runtime,
-      constructor
+      runtimeOperations: runtime,
+      constructorOperations: constructor
     } as DisassembledContract;
   }
 
