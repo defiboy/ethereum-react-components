@@ -34,9 +34,10 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
     }
   }
 
-  const hasTraces = props.transactionTrace !== undefined
+  const hasTraces = props.transactionTrace && props.transactionTrace.structLogs.length > 0
+
   return (
-    <Container>
+    <Container transactionTrace={props.transactionTrace}>
       {props.transactionHash && <h4>Transaction hash: {props.transactionHash}</h4>}
       <GraphContainer>
         <CFGraph
@@ -101,8 +102,8 @@ const StorageTable: React.FC<IStorageTableProps> = (props: IStorageTableProps) =
 export const Container = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 21% 42% auto;
-  grid-template-rows: 75% 25%;
+  grid-template-columns: 19% 38% auto;
+  grid-template-rows: ${props => (props.transactionTrace && props.transactionTrace.structLogs.length > 0) ? "75% 25%;" : "100% 0;"}
   grid-row-gap: 0.4px;
   grid-template-areas:
     'graph graph graph graph'
@@ -123,23 +124,26 @@ export const DetailsContainer = styled.section`
 export const MemoryDiv = styled.section`
   margin-top: 1em;
   grid-area: memory;
-  font-size: 0.8em;
+  font-size: 0.9em;
   height: 101%;
   overflow: scroll;
+  width: 100%;
 `
 
 export const StackDiv = styled.section`
   margin-top: 1em;
   grid-area: stack;
   height: 101%;
-  font-size: 0.8em;
+  font-size: 0.9em;
   overflow: scroll;
+  width: 100%;
 `
 
 export const StorageDiv = styled.section`
   grid-area: storage;
   margin-top: 1em;
-  font-size: 0.8em;
+  font-size: 0.9em;
   overflow: scroll;
+  width: 100%;
   height: 101%;
 `
