@@ -103,7 +103,8 @@ export const Container = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 19% 38% auto;
-  grid-template-rows: ${props => (props.transactionTrace && props.transactionTrace.structLogs.length > 0) ? "75% 25%;" : "100% 0;"}
+  grid-template-rows: ${props =>
+    props.transactionTrace && props.transactionTrace.structLogs.length > 0 ? '75% 25%;' : '100% 0;'}
   grid-row-gap: 0.4px;
   grid-template-areas:
     'graph graph graph graph'
