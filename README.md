@@ -1,6 +1,8 @@
-# ethereum-react-components
+# Ethereum-react-components
 
 A set of React components for Ethereum
+
+[![CircleCI](https://circleci.com/gh/solid-studio/ethereum-react-components.svg?style=svg)](https://circleci.com/gh/solid-studio/ethereum-react-components)
 
 #### Components
 
