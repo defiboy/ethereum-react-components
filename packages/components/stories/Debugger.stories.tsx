@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { Debugger } from '../src';
+import { ControlFlowGraph } from '../../types/lib/ControlFlowGraph';
+import { ControlFlowGraphCreator } from '../../utilities/src/cfg/ControlFlowGraphCreator';
 
 const bytecode = '6080604052348015600f57600080fd5b5060043610604f576000357c0100000000000000000000000000000000000000000000000000000000900480632096525514605457806355241077146070575b600080fd5b605a609b565b6040518082815260200191505060405180910390f35b609960048036036020811015608457600080fd5b810190808035906020019092919050505060a4565b005b60008054905090565b806000819055505056fea165627a7a723058209c7687721ed665e81d460ae7cfa9f215783aaa55a62ee755d01c2d22268895970029'
 
@@ -1382,8 +1384,23 @@ const traces = [
     }
 ]
 
+const txTrace = {
+    transactionHash: 'haxh',
+    connectionId: 1,
+    gas: 0,
+    returnValue: null,
+    structLogs: traces
+}
+
+
+let flow: ControlFlowGraph
+
+flow = bytecode ? new ControlFlowGraphCreator().buildControlFlowGraphFromBytecode(
+    bytecode
+) : null
+
 export const Default = () => {
-    return <Debugger traces={traces} bytecode={bytecode}></Debugger>
+    return <Debugger transactionTrace={txTrace} blocks={flow.contractRuntime.blocks}></Debugger>
 }
 
 export default {

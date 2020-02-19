@@ -1,6 +1,6 @@
 {
   "name": "@ethereum-react/components",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
@@ -29,7 +29,6 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
-    "@ethereum-react-components/cfg": "^1.1.0",
     "@storybook/addon-a11y": "^5.2.8",
     "@storybook/addon-actions": "^5.2.8",
     "@storybook/addon-console": "^1.2.1",

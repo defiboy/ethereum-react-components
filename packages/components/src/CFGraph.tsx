@@ -30,10 +30,14 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
   const innerElemRef = React.useRef<SVGSVGElement>(null)
 
   React.useEffect(() => {
-    if (props.blocks && !props.renderTrigger) {
-      renderGraph()
+    if (!props.renderTrigger) {
+      if (props.blocks) {
+        renderGraph()
+      } else {
+        // clear graph
+      }
     }
-  }, [props.blocks])
+  }, [props.blocks, props.trace])
 
   const renderGraph = () => {
     const g = new dagreD3.graphlib.Graph().setGraph({
