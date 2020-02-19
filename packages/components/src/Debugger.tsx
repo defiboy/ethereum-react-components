@@ -9,6 +9,7 @@ export interface IDebuggerProps {
   transactionTrace?: TransactionTrace
   renderTrigger?: any
   transactionHash?: string
+  operationSelected?: (op: Operation) => void
 }
 
 export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
@@ -25,6 +26,10 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
       const trace = props.transactionTrace.structLogs.find((item: StructLog) => {
         return item.pc === op.offset
       })
+
+      if (props.operationSelected) {
+        props.operationSelected(op)
+      }
 
       setMemory(trace.memory)
       setStack(trace.stack)
