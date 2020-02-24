@@ -130,7 +130,7 @@ export const DetailsContainer = styled.section`
 export const MemoryDiv = styled.section`
   margin-top: 1em;
   grid-area: memory;
-  font-size: 0.9em;
+  font-size: 0.7em;
   height: 101%;
   overflow: scroll;
   width: 100%;
@@ -140,7 +140,7 @@ export const StackDiv = styled.section`
   margin-top: 1em;
   grid-area: stack;
   height: 101%;
-  font-size: 0.9em;
+  font-size: 0.7em;
   overflow: scroll;
   width: 100%;
 `
