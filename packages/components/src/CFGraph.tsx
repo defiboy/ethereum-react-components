@@ -14,7 +14,8 @@ export interface ICFGraphProps {
 }
 
 export interface IGraphOptions {
-  dir: 'LR' | 'TB'
+  dir?: 'LR' | 'TB'
+  initialZoom?: number
 }
 
 const offsetColWidth = 60
@@ -79,6 +80,16 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 
     // Run the renderer. This is what draws the final graph.
     render(inner as any, g)
+
+    const firstNodePos = getFirstNodePosition()
+
+    if (firstNodePos) {
+      svg.call(zoom.transform, d3.zoomIdentity.translate(-firstNodePos[0] + 10, -firstNodePos[1] + 10))
+    }
+
+    if (props.options && props.options.initialZoom) {
+      svg.call(zoom.scaleTo, props.options.initialZoom, [0, 0])
+    }
   }
 
   const opSelected = (op: Operation) => {
@@ -204,6 +215,28 @@ export const CFGraph: React.FC<ICFGraphProps> = (props: ICFGraphProps) => {
 
     if (block.childB) {
       graph.setEdge(block.operations[0].offset.toString(), block.childB.toString(), { label: '' })
+    }
+  }
+
+  const getFirstNodePosition = () => {
+    try {
+      const firstNode = d3.select('.nodes .node:first-child')
+      const translate = firstNode.attr('transform')
+      const regex = /translate\((\d*\.?\d*),(\d*\.?\d*)\)/gm
+      const match = regex.exec(translate)
+
+      const x = Number.parseFloat(match[1])
+      const y = Number.parseFloat(match[2])
+      const rect = firstNode.select('rect')
+
+      const posX = x + Number.parseFloat(rect.attr('x'))
+      const posY = y + Number.parseFloat(rect.attr('y'))
+
+      return [posX, posY]
+    } catch (error) {
+      console.error('failed to get first node position: ' + error)
+
+      return null
     }
   }
 

@@ -50,6 +50,7 @@ export const Debugger: React.FC<IDebuggerProps> = (props: IDebuggerProps) => {
           trace={props.transactionTrace}
           blocks={props.blocks}
           operationSelected={op => onClick(op)}
+          options={{ initialZoom: 0.7 }}
         />
       </GraphContainer>
 
