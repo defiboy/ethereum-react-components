@@ -37,14 +37,14 @@
   },
   "dependencies": {
     "@ethereum-react/types": "^1.5.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bn.js": "^5.0.0",
     "ethereumjs-util": "^6.2.0"
   },
   "gitHead": "808a447a3c8224af00ba0152672c48e6accd5159",
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "jest": "^25.1.0"
   }
 }
