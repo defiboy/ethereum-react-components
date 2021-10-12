@@ -3,5 +3,5 @@ export enum CompilerVersion {
   SOLIDITY_5 = "SOLIDITY_5",
   SOLIDITY_6 = "SOLIDITY_6",
   SOLIDITY_7 = "SOLIDITY_7",
-  SOLIDITY_8 = "SOLIDITY_8",
+  SOLIDITY_8 = "SOLIDITY_8"
 }
