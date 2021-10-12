@@ -1,6 +1,6 @@
 {
   "name": "@ethereum-react/components",
-  "version": "1.12.1",
+  "version": "1.13.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
@@ -55,7 +55,7 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "@ethereum-react/types": "^1.5.0",
+    "@ethereum-react/types": "^1.6.0",
     "d3": "^5.14.2",
     "dagre-d3": "^0.6.4"
   },
