@@ -115,7 +115,6 @@ workflows:
           requires:
             - tslint-and-format
             - tests
-            - npm-audit
           filters:
             branches:
               only: master
