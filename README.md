@@ -10,7 +10,7 @@ A set of React components for Ethereum
 
 ### Get Started
 
-> git clone git@github.com:solid-studio/ethereum-react-components.git
+> git clone git@github.com:defiboy/ethereum-react-components.git
 
 > npm install
 
