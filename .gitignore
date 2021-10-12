@@ -4,3 +4,4 @@ junit.xml
 lib
 TODO.md
 .DS_Store
+packages/**/coverage
